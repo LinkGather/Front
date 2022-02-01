@@ -1,7 +1,8 @@
-import React, { useContext, useState } from 'react';
+import * as React from 'react';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
-import { ReactComponent as EmptyHeart } from '../images/emptyHeart.svg';
-import { ReactComponent as FillHeart } from '../images/fillHeart.svg';
+import EmptyHeart from '../images/emptyHeart.svg';
+import FillHeart from '../images/fillHeart.svg';
 import { dibApi, likeApi } from '../axios/axios';
 import Button from '../elements/Button';
 import LikeCountImg from '../images/likeCount.png';

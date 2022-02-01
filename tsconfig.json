@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2021",
+    "skipLibCheck": true,
+    "module": "commonjs",
+    "strict":true,
+    "strictNullChecks": false,
+    "esModuleInterop": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "outDir": "dist",
+    "rootDir": "./src",
+    "jsx":"react"
+  },
+  "include": ["src/**/*", "model/dbc.ts", "src/__test__","src/custom.d.ts"],
+  "exclude": ["node_modules"],
+}

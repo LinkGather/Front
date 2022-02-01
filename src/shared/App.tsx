@@ -1,3 +1,4 @@
+import * as React from 'react'
 import { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { Route, Switch } from 'react-router-dom';
@@ -9,7 +10,7 @@ import { isToken } from '../util/getToken';
 
 function App() {
   const [isLogin, setIsLogin] = useState(false);
-  const setState = (state) => setIsLogin(state);
+  const setState = (state:boolean) => setIsLogin(state);
   const history = useHistory();
   useEffect(() => {
     setState(isToken());

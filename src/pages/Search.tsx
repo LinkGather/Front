@@ -1,13 +1,14 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 import CardList from '../components/CardList';
 import Header from '../components/Header';
-import Loader from 'react-spinners/SyncLoader';
+import Loader from '../elements/Loader';
 import { searchApi } from '../axios/axios';
 import { PostContext } from '../contextAPI/posts';
 import { useHistory } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 
-const Search = (props) => {
+const Search: React.FC = (props) => {
   const [cards, setCards] = useState([{}]);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
@@ -20,16 +21,17 @@ const Search = (props) => {
       console.log(res);
     }
   };
+  const sortPosts = async () => {};
 
   useEffect(() => {
     setPosts();
   }, []);
 
   return (
-    <PostContext.Provider value={{ cards, setPosts }}>
+    <PostContext.Provider value={{ cards, setPosts, sortPosts }}>
       <Header />
       <NavBar searched={true} />
-      {loading ? <CardList /> : <Loader css={{ position: 'absolute', top: '50%', left: '50%' }} />}
+      {loading ? <CardList /> : <Loader />}
     </PostContext.Provider>
   );
 };

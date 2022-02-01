@@ -1,4 +1,5 @@
-import React, { useContext, useRef } from 'react';
+import * as React from 'react';
+import { useContext, useRef } from 'react';
 import styled from 'styled-components';
 import Logo from '../elements/Logo';
 import Logout from '../elements/LogoutButton';

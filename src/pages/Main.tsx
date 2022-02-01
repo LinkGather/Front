@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
 import Header from '../components/Header';
 import CardList from '../components/CardList';
 import { PostContext } from '../contextAPI/posts';
 import { getPostApi, getPostSortApi } from '../axios/axios';
-import Loader from 'react-spinners/SyncLoader';
+import Loader from '../elements/Loader';
 import NavBar from '../components/NavBar';
 
-const Main = (props) => {
+const Main = () => {
   const [cards, setCards] = useState([{}]);
   const [loading, setLoading] = useState(false);
   const setPosts = async () => {
@@ -35,7 +36,7 @@ const Main = (props) => {
     <PostContext.Provider value={{ cards, setPosts, sortPosts }}>
       <Header />
       <NavBar />
-      {loading ? <CardList /> : <Loader css={{ position: 'absolute', top: '50%', left: '50%' }} />}
+      {loading ? <CardList /> : <Loader />}
     </PostContext.Provider>
   );
 };

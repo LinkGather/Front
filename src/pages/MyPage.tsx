@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from 'react';
-import Loader from 'react-spinners/SyncLoader';
+import * as React from 'react';
+import { useEffect, useState } from 'react';
+import Loader from '../elements/Loader';
 import styled from 'styled-components';
 import { getMyPostApi } from '../axios/axios';
 import CardList from '../components/CardList';
@@ -7,7 +8,7 @@ import Header from '../components/Header';
 import NavBar from '../components/NavBar';
 import { PostContext } from '../contextAPI/posts';
 
-const MyPage = (props) => {
+const MyPage = () => {
   const [cards, setCards] = useState([{}]);
   const [loading, setLoading] = useState(false);
   const setPosts = async () => {
@@ -15,13 +16,14 @@ const MyPage = (props) => {
     setCards(res.data.posts);
     setLoading(true);
   };
+  const sortPosts = async () => {};
 
   useEffect(() => {
     setPosts();
   }, []);
 
   return (
-    <PostContext.Provider value={{ cards, setPosts }}>
+    <PostContext.Provider value={{ cards, setPosts, sortPosts }}>
       <Header />
       <NavBar />
       {loading ? (
@@ -31,7 +33,7 @@ const MyPage = (props) => {
           <PostNull>작성한 글이 없습니다. 우측상단의 등록버튼을 통해 등록해주세요</PostNull>
         )
       ) : (
-        <Loader css={{ position: 'absolute', top: '50%', left: '50%' }} />
+        <Loader />
       )}
     </PostContext.Provider>
   );

@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 import Grid from '../elements/Grid';
 import { PostContext } from '../contextAPI/posts';
