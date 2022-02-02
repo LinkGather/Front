@@ -1,8 +1,9 @@
-import React, { useContext } from 'react';
+import * as React from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 import { UserContext } from '../contextAPI/users';
 
-const Logout = (props) => {
+const Logout = () => {
   const { setState } = useContext(UserContext);
 
   const logout = () => {

@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { SigninData, SignupData, submitPostData } from '../interfaces/data';
 import { getToken } from '../util/getToken';
 
 const api = axios.create({
@@ -20,7 +21,7 @@ api.interceptors.request.use((config) => {
 });
 
 //회원가입 api
-export const signUpApi = async (data) => {
+export const signUpApi = async (data: SignupData) => {
   try {
     console.log(data);
     const res = await api.post('/users/signup', {
@@ -30,13 +31,13 @@ export const signUpApi = async (data) => {
       passwordCheck: data.passwordCheck,
     });
     return res;
-  } catch (err) {
+  } catch (err: any) {
     return err.response;
   }
 };
 
 //로그인 api
-export const loginApi = async (data) => {
+export const loginApi = async (data: SigninData) => {
   try {
     console.log(data);
     const res = await api.post('/users/signin', {
@@ -44,18 +45,18 @@ export const loginApi = async (data) => {
       password: data.password,
     });
     return res;
-  } catch (err) {
+  } catch (err: any) {
     return err.response;
   }
 };
 
 //이미지 미리보기 api
-export const previewApi = async (url) => {
+export const previewApi = async (url: string) => {
   try {
     return await api.post(`/posts/preview`, {
       url: url,
     });
-  } catch (err) {
+  } catch (err: any) {
     return err.response;
   }
 };
@@ -64,7 +65,7 @@ export const previewApi = async (url) => {
 export const getPostApi = async () => {
   try {
     return await api.get('/posts');
-  } catch (err) {
+  } catch (err: any) {
     return err.response;
   }
 };
@@ -73,7 +74,7 @@ export const getPostApi = async () => {
 export const getPostSortApi = async () => {
   try {
     return await api.get('/posts/sort');
-  } catch (err) {
+  } catch (err: any) {
     return err.response;
   }
 };
@@ -82,69 +83,69 @@ export const getPostSortApi = async () => {
 export const getMyPostApi = async () => {
   try {
     return await api.get(`/posts/mypage`);
-  } catch (err) {
+  } catch (err: any) {
     return err.response;
   }
 };
 
 //포스트 등록 api
-export const submitPostApi = async (data) => {
+export const submitPostApi = async (data: submitPostData) => {
   try {
     return api.post('/posts', {
       url: data.url,
       title: data.title,
       description: data.description,
     });
-  } catch (err) {
+  } catch (err: any) {
     return err.response;
   }
 };
 
 //포스트 수정 api
-export const editPostApi = async (id, data) => {
+export const editPostApi = async (id: number, data: submitPostData) => {
   try {
     return api.patch(`/posts/${id}`, {
       url: data.url,
       title: data.title,
       description: data.description,
     });
-  } catch (err) {
+  } catch (err: any) {
     return err.response;
   }
 };
 
 //추천하기 api
-export const likeApi = async (id) => {
+export const likeApi = async (id: number) => {
   try {
     return await api.post(`/posts/${id}/like`);
-  } catch (err) {
+  } catch (err: any) {
     return err.response;
   }
 };
 
 //찜하기 api
-export const dibApi = async (id) => {
+export const dibApi = async (id: number) => {
   try {
     return await api.post(`/posts/${id}/dib`);
-  } catch (err) {
+  } catch (err: any) {
     return err.response;
   }
 };
 
 //검색하기 api
-export const searchApi = async (words) => {
+export const searchApi = async (words: string) => {
   try {
     return await api.get(`/posts/search?words=${words}`);
-  } catch (err) {
+  } catch (err: any) {
     return err.response;
   }
 };
 
 //삭제하기 api
-export const deletePostApi = async (id) => {
+export const deletePostApi = async (id: number) => {
   try {
     return await api.delete(`/posts/${id}`);
-  } catch (err) {
+  } catch (err: any) {
     return err.response;
   }
 };

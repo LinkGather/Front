@@ -6,8 +6,12 @@ export interface ButtonProps {
   _onClick?: React.MouseEventHandler<HTMLButtonElement>;
 }
 
+export interface CloseButtonProps {
+  _onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+}
+
 export interface CardProps {
-  card: CardType;
+  card?: CardType;
 }
 
 export interface CardDetailProps extends CardProps {
@@ -15,5 +19,17 @@ export interface CardDetailProps extends CardProps {
 }
 
 export interface EditClickProps {
-  editClick: boolean;
+  editClick?: boolean;
+}
+
+export interface Click {
+  click?: boolean;
+}
+
+export interface NavBarProps {
+  searched?: boolean;
+}
+
+export interface TitleProps {
+  text: string;
 }

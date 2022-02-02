@@ -44,7 +44,7 @@ const CardDetail: React.FC<CardDetailProps> = (props) => {
   };
 
   const descChange = (e: Event) => {
-    const DESC = (e.target as HTMLInputElement).value;
+    const DESC = (e.target as HTMLTextAreaElement).value;
     setDescription(DESC);
   };
 

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { useState, useContext, useRef, useEffect } from 'react';
+import { useState, useContext, useRef } from 'react';
 import Title from '../elements/Title';
 import Button from '../elements/Button';
 import styled from 'styled-components';
@@ -8,7 +8,7 @@ import { previewApi, submitPostApi } from '../axios/axios';
 import { PostContext } from '../contextAPI/posts';
 import CloseButton from '../elements/CloseButton';
 
-const PostModal = (props) => {
+const PostModal = () => {
   //modal state
   const [open, setOpen] = useState(false);
 
@@ -28,29 +28,29 @@ const PostModal = (props) => {
   const { setPosts } = useContext(PostContext);
 
   //ref
-  const urlRef = useRef();
-  const titleRef = useRef();
-  const descriptionRef = useRef();
+  const urlRef = useRef<HTMLInputElement>();
+  const titleRef = useRef<HTMLInputElement>();
+  const descriptionRef = useRef<HTMLTextAreaElement>();
 
   //input onChange event
-  const urlChange = (e) => {
-    const URL = e.target.value;
+  const urlChange = (e: Event) => {
+    const URL = (e.target as HTMLInputElement).value;
     setUrl(URL);
   };
 
-  const titleChange = (e) => {
-    const TITLE = e.target.value;
+  const titleChange = (e: Event) => {
+    const TITLE = (e.target as HTMLInputElement).value;
     setTitle(TITLE);
   };
 
-  const descriptionChange = (e) => {
-    const description = e.target.value;
+  const descriptionChange = (e: Event) => {
+    const description = (e.target as HTMLTextAreaElement).value;
     setDescription(description);
   };
 
   //modal controll
-  const handlePostModal = (e) => {
-    if (e.target.className.includes('handleModal') && isLogin) {
+  const handlePostModal = (e: React.MouseEvent<HTMLElement>) => {
+    if ((e.target as Element).className.includes('handleModal') && isLogin) {
       setOpen(!open);
       setUrl(null);
       setTitle(null);
@@ -137,12 +137,12 @@ const PostModal = (props) => {
           alignItems: 'center',
           cursor: 'pointer',
         }}
-        onClick={handlePostModal}
+        onClick={() => handlePostModal}
       >
         등록
       </div>
       {open ? (
-        <GrayBackground className="handleModal" onClick={handlePostModal}>
+        <GrayBackground className="handleModal" onClick={() => handlePostModal}>
           <PopUpWrap>
             <Title text={'등록하기'} />
             <CloseButton _onClick={handlePostModal} />
@@ -154,7 +154,7 @@ const PostModal = (props) => {
                   <PreviewInput
                     placeholder="https://www.linkgather.com"
                     ref={urlRef}
-                    onChange={urlChange}
+                    onChange={() => urlChange}
                   />
                   <Preview onClick={getPreview}>이미지 미리보기</Preview>
                 </div>
@@ -167,7 +167,7 @@ const PostModal = (props) => {
                   type="text"
                   placeholder="제목을 입력해주세요"
                   ref={titleRef}
-                  onChange={titleChange}
+                  onChange={() => titleChange}
                 />
                 {titleNull ? <ErrMessage>제목을 입력해주세요</ErrMessage> : null}
               </InputWrap>
@@ -175,10 +175,9 @@ const PostModal = (props) => {
               <InputWrap>
                 <Label>설명</Label>
                 <Description
-                  type="text"
                   placeholder="사이트에 대한 간략한 설명을 입력해주세요"
                   ref={descriptionRef}
-                  onChange={descriptionChange}
+                  onChange={() => descriptionChange}
                 />
                 {descriptionNull ? <ErrMessage>간단한 설명을 입력해주세요</ErrMessage> : null}
               </InputWrap>

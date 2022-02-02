@@ -1,7 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
+import { TitleProps } from '../interfaces/props';
 
-const Title = (props) => {
+const Title: React.FC<TitleProps> = (props) => {
   const { text } = props;
   return <T className="handleModal">{text}</T>;
 };

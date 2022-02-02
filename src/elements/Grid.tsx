@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
-const Grid = (props) => {
+const Grid: React.FC = (props) => {
   const { children } = props;
   return <GridEl>{children}</GridEl>;
 };

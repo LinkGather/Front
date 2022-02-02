@@ -40,7 +40,7 @@ const LoginModal = () => {
   };
 
   //modal controll
-  const handleLoginModal = (e: Event) => {
+  const handleLoginModal = (e: React.MouseEvent<HTMLElement>) => {
     if ((e.target as Element).className.includes('handleModal')) {
       setOpen(!open);
       setLoginErr(false);

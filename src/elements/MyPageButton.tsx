@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 
-const MyPageButton = (props) => {
+const MyPageButton = () => {
   const history = useHistory();
   const toMyPage = () => {
     history.push(`/mypage`);

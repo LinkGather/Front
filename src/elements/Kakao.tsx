@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import { BsFillChatFill } from 'react-icons/bs';
 
-function Kakao(props) {
+function Kakao() {
   const a = () => {
     window.location.href = 'http://localhost:3001/users/kakao';
   };

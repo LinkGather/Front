@@ -9,7 +9,19 @@ import { useHistory } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 
 const Search: React.FC = () => {
-  const [cards, setCards] = useState([{}]);
+  const [cards, setCards] = useState([
+    {
+      id: 0,
+      title: '',
+      description: '',
+      image: '',
+      url: '',
+      uploadTime: '',
+      likeNum: 0,
+      dibs: [{}],
+      likes: [{}],
+    },
+  ]);
   const [loading, setLoading] = useState(false);
   const history = useHistory();
   const setPosts = async () => {

@@ -8,7 +8,7 @@ import { validatePassword, validatePasswordCheck } from '../util/passwordValidat
 import { validateEmail } from '../util/emailValidator';
 import CloseButton from '../elements/CloseButton';
 
-const SignUpModal = (props) => {
+const SignUpModal = () => {
   //modal state
   const [open, setOpen] = useState(false);
 
@@ -30,10 +30,10 @@ const SignUpModal = (props) => {
   const [passwordCheckNull, setPasswordCheckNull] = useState(false);
 
   //Ref
-  const nameRef = useRef();
-  const emailRef = useRef();
-  const passwordRef = useRef();
-  const passwordCheckRef = useRef();
+  const nameRef = useRef<HTMLInputElement>();
+  const emailRef = useRef<HTMLInputElement>();
+  const passwordRef = useRef<HTMLInputElement>();
+  const passwordCheckRef = useRef<HTMLInputElement>();
 
   //이메일 확인
   useEffect(() => {
@@ -75,26 +75,27 @@ const SignUpModal = (props) => {
   }, [passwordCheck]);
 
   //input onChange event
-  const nameChange = (e) => {
-    const NAME = e.target.value;
+  const nameChange = (e: Event) => {
+    const NAME = (e.target as HTMLInputElement).value;
     setName(NAME);
   };
-  const emailChange = (e) => {
-    const EMAIL = e.target.value;
+  const emailChange = (e: Event) => {
+    const EMAIL = (e.target as HTMLInputElement).value;
     setEmail(EMAIL);
   };
-  const passwordChange = (e) => {
-    const PASSWORD = e.target.value;
+  const passwordChange = (e: Event) => {
+    const PASSWORD = (e.target as HTMLInputElement).value;
     setPassword(PASSWORD);
   };
-  const passwordCheckChange = (e) => {
-    const PASSWORDCHECK = e.target.value;
+  const passwordCheckChange = (e: Event) => {
+    const PASSWORDCHECK = (e.target as HTMLInputElement).value;
     setPasswordCheck(PASSWORDCHECK);
   };
 
   //modal controll
-  const handleSignUpModal = (e) => {
-    if (e.target.className.includes('handleModal')) {
+  const handleSignUpModal = (e: React.MouseEvent<HTMLElement>) => {
+    e.preventDefault();
+    if ((e.target as Element).className.includes('handleModal')) {
       setOpen(!open);
       setNameErr(false);
       setEmailDupErr(false);
@@ -204,7 +205,7 @@ const SignUpModal = (props) => {
 
             <InputWrap>
               <Label>이름</Label>
-              <InputEl type="text" placeholder="홍길동" ref={nameRef} onChange={nameChange} />
+              <InputEl type="text" placeholder="홍길동" ref={nameRef} onChange={() => nameChange} />
               {nameErr ? <ErrMessage>이름을 확인해주세요</ErrMessage> : null}
               {nameNull ? <ErrMessage>이름을 입력해주세요</ErrMessage> : null}
             </InputWrap>
@@ -215,7 +216,7 @@ const SignUpModal = (props) => {
                 type="text"
                 placeholder="example@example.com"
                 ref={emailRef}
-                onChange={emailChange}
+                onChange={() => emailChange}
               />
               {emailDupErr ? <ErrMessage>중복된 이메일입니다.</ErrMessage> : null}
               {emailErr ? <ErrMessage>이메일 형식을 확인해주세요</ErrMessage> : null}
@@ -228,7 +229,7 @@ const SignUpModal = (props) => {
                 type="password"
                 placeholder="********"
                 ref={passwordRef}
-                onChange={passwordChange}
+                onChange={() => passwordChange}
               />
               {passwordErr ? <ErrMessage>패스워드를 확인해주세요</ErrMessage> : null}
               {passwordNull ? <ErrMessage>패스워드를 입력해주세요</ErrMessage> : null}
@@ -240,7 +241,7 @@ const SignUpModal = (props) => {
                 type="password"
                 placeholder="********"
                 ref={passwordCheckRef}
-                onChange={passwordCheckChange}
+                onChange={() => passwordCheckChange}
               />
               {passwordCheckErr ? <ErrMessage>패스워드를 확인해주세요</ErrMessage> : null}
               {passwordCheckNull ? <ErrMessage>패스워드 확인을 입력해주세요</ErrMessage> : null}

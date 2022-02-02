@@ -9,7 +9,19 @@ import NavBar from '../components/NavBar';
 import { PostContext } from '../contextAPI/posts';
 
 const MyPage = () => {
-  const [cards, setCards] = useState([{}]);
+  const [cards, setCards] = useState([
+    {
+      id: 0,
+      title: '',
+      description: '',
+      image: '',
+      url: '',
+      uploadTime: '',
+      likeNum: 0,
+      dibs: [{}],
+      likes: [{}],
+    },
+  ]);
   const [loading, setLoading] = useState(false);
   const setPosts = async () => {
     const res = await getMyPostApi();

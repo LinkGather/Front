@@ -1,7 +1,7 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 
-const FlexEnd = (props) => {
+const FlexEnd: React.FC = (props) => {
   const { children } = props;
   return <End>{children}</End>;
 };

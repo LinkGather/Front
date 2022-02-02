@@ -8,7 +8,19 @@ import Loader from '../elements/Loader';
 import NavBar from '../components/NavBar';
 
 const Main = () => {
-  const [cards, setCards] = useState([{}]);
+  const [cards, setCards] = useState([
+    {
+      id: 0,
+      title: '',
+      description: '',
+      image: '',
+      url: '',
+      uploadTime: '',
+      likeNum: 0,
+      dibs: [{}],
+      likes: [{}],
+    },
+  ]);
   const [loading, setLoading] = useState(false);
   const setPosts = async () => {
     setLoading(false);

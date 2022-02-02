@@ -1,8 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
 import { ReactComponent as TopArrow } from '../images/TopArrow.svg';
 
-const TopButton = (props) => {
+const TopButton = () => {
   const toTop = () => {
     window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
   };

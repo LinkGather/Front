@@ -1,9 +1,9 @@
-import React from 'react';
+import * as React from 'react';
 import { Link } from 'react-router-dom';
-import { ReactComponent as TitleImg } from '../images/titleLogo.svg';
+import { ReactComponent as TitleImg } from '../images/TitleLogo.svg';
 import styled from 'styled-components';
 
-const Logo = (props) => {
+const Logo = () => {
   return (
     <ImgBox>
       <Link to={'/'}>

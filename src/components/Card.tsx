@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { useContext, useState } from 'react';
 import styled from 'styled-components';
-import EmptyHeart from '../images/emptyHeart.svg';
-import FillHeart from '../images/fillHeart.svg';
+import { ReactComponent as EmptyHeart } from '../images/EmptyHeart.svg';
+import { ReactComponent as FillHeart } from '../images/FillHeart.svg';
 import { dibApi, likeApi } from '../axios/axios';
 import Button from '../elements/Button';
-import LikeCountImg from '../images/likeCount.png';
+import LikeCountImg from '../images/LikeCount.png';
 import { FiThumbsUp } from 'react-icons/fi';
 import { UserContext } from '../contextAPI/users';
 import CardDetail from './CardDetail';

@@ -3,9 +3,10 @@ import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { PostContext } from '../contextAPI/posts';
+import { Click, NavBarProps } from '../interfaces/props';
 import PostModal from './PostModal';
 
-const NavBar = (props) => {
+const NavBar: React.FC<NavBarProps> = (props) => {
   const { searched } = props;
   const { cards, sortPosts, setPosts } = useContext(PostContext);
 
@@ -105,7 +106,7 @@ const Sort = styled.span`
     color: #339af0;
   }
 
-  color: ${(props) => (props.click ? '#339af0' : 'black')};
+  color: ${(props: Click) => (props.click ? '#339af0' : 'black')};
 `;
 
 const WordWrap = styled.span`
