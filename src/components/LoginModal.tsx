@@ -8,7 +8,7 @@ import { UserContext } from '../contextAPI/users';
 import CloseButton from '../elements/CloseButton';
 import Kakao from '../elements/Kakao';
 
-const LoginModal = (props) => {
+const LoginModal = () => {
   //modal state
   const [open, setOpen] = useState(false);
 
@@ -22,26 +22,26 @@ const LoginModal = (props) => {
   const [passwordNull, setPasswordNull] = useState(false);
 
   //ref
-  const emailRef = useRef();
-  const passwordRef = useRef();
+  const emailRef = useRef<HTMLInputElement>();
+  const passwordRef = useRef<HTMLInputElement>();
 
   //useContext
   const { setState } = useContext(UserContext);
 
   //input onChange event
-  const emailChange = (e) => {
-    const EMAIL = e.target.value;
+  const emailChange = (e: Event) => {
+    const EMAIL = (e.target as HTMLInputElement).value;
     setEmail(EMAIL);
   };
 
-  const passwordChange = (e) => {
-    const PASSWORD = e.target.value;
+  const passwordChange = (e: Event) => {
+    const PASSWORD = (e.target as HTMLInputElement).value;
     setPassword(PASSWORD);
   };
 
   //modal controll
-  const handleLoginModal = (e) => {
-    if (e.target.className.includes('handleModal')) {
+  const handleLoginModal = (e: Event) => {
+    if ((e.target as Element).className.includes('handleModal')) {
       setOpen(!open);
       setLoginErr(false);
     }
@@ -79,7 +79,7 @@ const LoginModal = (props) => {
       setLoginErr(true);
     }
   };
-  const enterLogin = (e) => {
+  const enterLogin = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
       login();
     }
@@ -87,11 +87,11 @@ const LoginModal = (props) => {
 
   return (
     <>
-      <ModalButton className="handleModal" onClick={handleLoginModal}>
+      <ModalButton className="handleModal" onClick={() => handleLoginModal}>
         로그인
       </ModalButton>
       {open ? (
-        <GrayBackground className="handleModal" onClick={handleLoginModal}>
+        <GrayBackground className="handleModal" onClick={() => handleLoginModal}>
           <PopUpWrap>
             <Title text={'로그인'} />
             <CloseButton _onClick={handleLoginModal} />
@@ -102,8 +102,8 @@ const LoginModal = (props) => {
                   type="text"
                   placeholder="example@example.com"
                   ref={emailRef}
-                  onChange={emailChange}
-                  onKeyPress={enterLogin}
+                  onChange={() => emailChange}
+                  onKeyPress={() => enterLogin}
                 />
                 {emailNull ? <ErrMessage>이메일을 입력해주세요</ErrMessage> : null}
               </InputWrap>
@@ -113,8 +113,8 @@ const LoginModal = (props) => {
                   type="password"
                   placeholder="********"
                   ref={passwordRef}
-                  onChange={passwordChange}
-                  onKeyPress={enterLogin}
+                  onChange={() => passwordChange}
+                  onKeyPress={() => enterLogin}
                 />
                 {passwordNull ? <ErrMessage>패스워드를 입력해주세요</ErrMessage> : null}
                 {loginErr ? <ErrMessage>이메일 및 패스워드를 확인해주세요</ErrMessage> : null}

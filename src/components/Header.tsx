@@ -10,11 +10,11 @@ import { GrSearch } from 'react-icons/gr';
 import MyPageButton from '../elements/MyPageButton';
 import { useHistory } from 'react-router-dom';
 
-const Header = (props) => {
+const Header = () => {
   let { isLogin } = useContext(UserContext);
 
   //ref
-  const searchRef = useRef();
+  const searchRef = useRef<HTMLInputElement>();
 
   //useHistroy
   const history = useHistory();
@@ -28,7 +28,7 @@ const Header = (props) => {
     }
   };
 
-  const enterSearch = (e) => {
+  const enterSearch = (e: KeyboardEvent) => {
     if (e.key === 'Enter') {
       search();
     }
@@ -43,7 +43,7 @@ const Header = (props) => {
             type="text"
             placeholder="검색어 입력"
             ref={searchRef}
-            onKeyPress={enterSearch}
+            onKeyPress={() => enterSearch}
           />
           <SearchIcon onClick={search}>
             <GrSearch />

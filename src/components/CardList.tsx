@@ -6,7 +6,7 @@ import { PostContext } from '../contextAPI/posts';
 import TopButton from '../elements/TopButton';
 import Card from './Card';
 
-const CardList = (props) => {
+const CardList = () => {
   //useContext
   const { cards } = useContext(PostContext);
   return (

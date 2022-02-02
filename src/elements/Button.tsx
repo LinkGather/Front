@@ -1,7 +1,8 @@
-import React from 'react';
+import * as React from 'react';
 import styled from 'styled-components';
+import { ButtonProps } from '../interfaces/props';
 
-const Button = (props) => {
+const Button: React.FC<ButtonProps> = (props) => {
   const { children, isFill, url, _onClick } = props;
   return isFill ? (
     url ? (
@@ -22,7 +23,7 @@ const Button = (props) => {
 
 Button.defaultProps = {
   isFill: false,
-  url: false,
+  url: null,
   _onClick: () => {},
 };
 

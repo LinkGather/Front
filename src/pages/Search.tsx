@@ -8,7 +8,7 @@ import { PostContext } from '../contextAPI/posts';
 import { useHistory } from 'react-router-dom';
 import NavBar from '../components/NavBar';
 
-const Search: React.FC = (props) => {
+const Search: React.FC = () => {
   const [cards, setCards] = useState([{}]);
   const [loading, setLoading] = useState(false);
   const history = useHistory();

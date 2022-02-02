@@ -9,8 +9,9 @@ import LikeCountImg from '../images/likeCount.png';
 import { FiThumbsUp } from 'react-icons/fi';
 import { UserContext } from '../contextAPI/users';
 import CardDetail from './CardDetail';
+import { CardProps } from '../interfaces/props';
 
-const Card = (props) => {
+const Card: React.FC<CardProps> = (props) => {
   const { card } = props;
   const { isLogin } = useContext(UserContext);
   //좋아요, 찜하기 state
@@ -20,7 +21,7 @@ const Card = (props) => {
   const [open, setOpen] = useState(false);
 
   //찜하기
-  const Dib = async (id) => {
+  const Dib = async (id: number) => {
     const res = await dibApi(id);
     if (res.status === 200) {
       setDibs(!Dibs);
@@ -29,7 +30,7 @@ const Card = (props) => {
     }
   };
 
-  const like = async (id) => {
+  const like = async (id: number) => {
     const res = await likeApi(id);
     if (res.status === 200) {
       setLikes(res.data?.likeNum);
@@ -38,8 +39,8 @@ const Card = (props) => {
     }
   };
 
-  const handleDetailModal = (e) => {
-    if (e.target?.className?.includes('handleModal')) {
+  const handleDetailModal = (e: MouseEvent) => {
+    if ((e.target as Element).className?.includes('handleModal')) {
       if (open) {
         document.body.style.overflow = 'unset';
       } else {
@@ -53,7 +54,7 @@ const Card = (props) => {
     <>
       {open ? <CardDetail _onClick={handleDetailModal} card={card} /> : null}
       <ImgHidden>
-        <img src={card?.image} alt="" className="handleModal" onClick={handleDetailModal} />
+        <img src={card?.image} alt="" className="handleModal" onClick={() => handleDetailModal} />
         <Jjim
           onClick={() => {
             Dib(card?.id);
@@ -62,10 +63,10 @@ const Card = (props) => {
           {Dibs && isLogin ? <FillHeart /> : <EmptyHeart />}
         </Jjim>
       </ImgHidden>
-      <Title className="handleModal" onClick={handleDetailModal}>
+      <Title className="handleModal" onClick={() => handleDetailModal}>
         {card?.title}
       </Title>
-      <CountWrap className="handleModal" onClick={handleDetailModal}>
+      <CountWrap className="handleModal" onClick={() => handleDetailModal}>
         <img src={LikeCountImg} alt="" />
         <span>{likes}</span>
       </CountWrap>

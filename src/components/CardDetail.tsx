@@ -7,8 +7,9 @@ import CloseButton from '../elements/CloseButton';
 import { BiEditAlt, BiArrowBack } from 'react-icons/bi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { PostContext } from '../contextAPI/posts';
+import { CardDetailProps, EditClickProps } from '../interfaces/props';
 
-const CardDetail = (props) => {
+const CardDetail: React.FC<CardDetailProps> = (props) => {
   const { _onClick, card } = props;
   const { setPosts } = useContext(PostContext);
 
@@ -27,23 +28,23 @@ const CardDetail = (props) => {
   const [descNull, setDescriptionNull] = useState(false);
 
   //ref
-  const urlRef = useRef();
-  const titleRef = useRef();
-  const descRef = useRef();
+  const urlRef = useRef<HTMLInputElement>();
+  const titleRef = useRef<HTMLInputElement>();
+  const descRef = useRef<HTMLTextAreaElement>();
 
   //onChange
-  const urlChange = (e) => {
-    const URL = e.target.value;
+  const urlChange = (e: Event) => {
+    const URL = (e.target as HTMLInputElement).value;
     setUrl(URL);
   };
 
-  const titleChange = (e) => {
-    const TITLE = e.target.value;
+  const titleChange = (e: Event) => {
+    const TITLE = (e.target as HTMLInputElement).value;
     setTitle(TITLE);
   };
 
-  const descChange = (e) => {
-    const DESC = e.target.value;
+  const descChange = (e: Event) => {
+    const DESC = (e.target as HTMLInputElement).value;
     setDescription(DESC);
   };
 
@@ -71,7 +72,7 @@ const CardDetail = (props) => {
   };
 
   //edit Post
-  const editPost = async (id) => {
+  const editPost = async (id: number) => {
     const data = {
       url,
       title,
@@ -102,12 +103,12 @@ const CardDetail = (props) => {
   };
 
   //delete modal
-  const delModal = (e) => {
+  const delModal = () => {
     setDel(!del);
   };
 
   //delete post
-  const deletePost = async (id) => {
+  const deletePost = async (id: number) => {
     const res = await deletePostApi(id);
     if (res.status === 200) {
       setOpen(false);
@@ -118,7 +119,7 @@ const CardDetail = (props) => {
   };
 
   return open ? (
-    <GrayBackground className="handleModal" onClick={_onClick}>
+    <GrayBackground className="handleModal" onClick={() => _onClick}>
       <PopUpWrap>
         <CloseButton />
         <OverFlowWrap>
@@ -147,7 +148,7 @@ const CardDetail = (props) => {
                   <PreviewInput
                     placeholder="https://www.linkgather.com"
                     ref={urlRef}
-                    onChange={urlChange}
+                    onChange={() => urlChange}
                     value={url}
                   />
                   <Preview onClick={getPreview}>이미지 미리보기</Preview>
@@ -161,7 +162,7 @@ const CardDetail = (props) => {
                   type="text"
                   placeholder="제목을 입력해주세요"
                   ref={titleRef}
-                  onChange={titleChange}
+                  onChange={() => titleChange}
                   value={title}
                 />
                 {titleNull ? <ErrMessage>제목을 입력해주세요</ErrMessage> : null}
@@ -170,10 +171,9 @@ const CardDetail = (props) => {
               <InputWrap>
                 <Label>설명</Label>
                 <Description
-                  type="text"
                   placeholder="사이트에 대한 간략한 설명을 입력해주세요"
                   ref={descRef}
-                  onChange={descChange}
+                  onChange={() => descChange}
                   value={description}
                 />
                 {descNull ? <ErrMessage>간단한 설명을 입력해주세요</ErrMessage> : null}
@@ -240,7 +240,7 @@ const OverFlowWrap = styled.div`
 
 const ButtonWrap = styled.div`
   display: flex;
-  justify-content: ${(props) => (props.editClick ? 'flex-start' : 'flex-end')};
+  justify-content: ${(props: EditClickProps) => (props.editClick ? 'flex-start' : 'flex-end')};
   align-items: center;
 `;
 
