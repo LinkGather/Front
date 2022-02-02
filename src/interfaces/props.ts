@@ -7,7 +7,7 @@ export interface ButtonProps {
 }
 
 export interface CloseButtonProps {
-  _onClick?: (e: React.MouseEvent<HTMLElement>) => void;
+  _onClick?: React.MouseEventHandler<HTMLElement | SVGElement>;
 }
 
 export interface CardProps {
@@ -15,7 +15,7 @@ export interface CardProps {
 }
 
 export interface CardDetailProps extends CardProps {
-  _onClick?: Function;
+  _onClick?: React.MouseEventHandler<HTMLElement>;
 }
 
 export interface EditClickProps {

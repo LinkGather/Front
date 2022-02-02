@@ -28,7 +28,7 @@ const Header = () => {
     }
   };
 
-  const enterSearch = (e: KeyboardEvent) => {
+  const enterSearch = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.key === 'Enter') {
       search();
     }
@@ -43,7 +43,7 @@ const Header = () => {
             type="text"
             placeholder="검색어 입력"
             ref={searchRef}
-            onKeyPress={() => enterSearch}
+            onKeyPress={enterSearch}
           />
           <SearchIcon onClick={search}>
             <GrSearch />

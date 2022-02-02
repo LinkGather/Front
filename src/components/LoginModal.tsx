@@ -29,19 +29,22 @@ const LoginModal = () => {
   const { setState } = useContext(UserContext);
 
   //input onChange event
-  const emailChange = (e: Event) => {
+  const emailChange = (e: React.ChangeEvent<HTMLElement>) => {
     const EMAIL = (e.target as HTMLInputElement).value;
     setEmail(EMAIL);
   };
 
-  const passwordChange = (e: Event) => {
+  const passwordChange = (e: React.ChangeEvent<HTMLElement>) => {
     const PASSWORD = (e.target as HTMLInputElement).value;
     setPassword(PASSWORD);
   };
 
   //modal controll
   const handleLoginModal = (e: React.MouseEvent<HTMLElement>) => {
-    if ((e.target as Element).className.includes('handleModal')) {
+    if (
+      (e.target as Element).getAttribute('class') === 'handleModal' ||
+      (e.target as Element).className.includes('handleModal')
+    ) {
       setOpen(!open);
       setLoginErr(false);
     }
@@ -79,7 +82,7 @@ const LoginModal = () => {
       setLoginErr(true);
     }
   };
-  const enterLogin = (e: KeyboardEvent) => {
+  const enterLogin = (e: React.KeyboardEvent<HTMLElement>) => {
     if (e.key === 'Enter') {
       login();
     }
@@ -87,11 +90,11 @@ const LoginModal = () => {
 
   return (
     <>
-      <ModalButton className="handleModal" onClick={() => handleLoginModal}>
+      <ModalButton className="handleModal" onClick={handleLoginModal}>
         로그인
       </ModalButton>
       {open ? (
-        <GrayBackground className="handleModal" onClick={() => handleLoginModal}>
+        <GrayBackground className="handleModal" onClick={handleLoginModal}>
           <PopUpWrap>
             <Title text={'로그인'} />
             <CloseButton _onClick={handleLoginModal} />
@@ -102,8 +105,8 @@ const LoginModal = () => {
                   type="text"
                   placeholder="example@example.com"
                   ref={emailRef}
-                  onChange={() => emailChange}
-                  onKeyPress={() => enterLogin}
+                  onChange={emailChange}
+                  onKeyPress={enterLogin}
                 />
                 {emailNull ? <ErrMessage>이메일을 입력해주세요</ErrMessage> : null}
               </InputWrap>
@@ -113,8 +116,8 @@ const LoginModal = () => {
                   type="password"
                   placeholder="********"
                   ref={passwordRef}
-                  onChange={() => passwordChange}
-                  onKeyPress={() => enterLogin}
+                  onChange={passwordChange}
+                  onKeyPress={enterLogin}
                 />
                 {passwordNull ? <ErrMessage>패스워드를 입력해주세요</ErrMessage> : null}
                 {loginErr ? <ErrMessage>이메일 및 패스워드를 확인해주세요</ErrMessage> : null}

@@ -33,24 +33,28 @@ const PostModal = () => {
   const descriptionRef = useRef<HTMLTextAreaElement>();
 
   //input onChange event
-  const urlChange = (e: Event) => {
+  const urlChange = (e: React.ChangeEvent<HTMLElement>) => {
     const URL = (e.target as HTMLInputElement).value;
     setUrl(URL);
   };
 
-  const titleChange = (e: Event) => {
+  const titleChange = (e: React.ChangeEvent<HTMLElement>) => {
     const TITLE = (e.target as HTMLInputElement).value;
     setTitle(TITLE);
   };
 
-  const descriptionChange = (e: Event) => {
+  const descriptionChange = (e: React.ChangeEvent<HTMLElement>) => {
     const description = (e.target as HTMLTextAreaElement).value;
     setDescription(description);
   };
 
   //modal controll
   const handlePostModal = (e: React.MouseEvent<HTMLElement>) => {
-    if ((e.target as Element).className.includes('handleModal') && isLogin) {
+    if (
+      isLogin &&
+      ((e.target as Element).getAttribute('class') === 'handleModal' ||
+        (e.target as Element).className.includes('handleModal'))
+    ) {
       setOpen(!open);
       setUrl(null);
       setTitle(null);
@@ -137,54 +141,56 @@ const PostModal = () => {
           alignItems: 'center',
           cursor: 'pointer',
         }}
-        onClick={() => handlePostModal}
+        onClick={handlePostModal}
       >
         등록
       </div>
       {open ? (
-        <GrayBackground className="handleModal" onClick={() => handlePostModal}>
+        <GrayBackground className="handleModal" onClick={handlePostModal}>
           <PopUpWrap>
-            <Title text={'등록하기'} />
             <CloseButton _onClick={handlePostModal} />
-            {preview ? <PreviewImage src={preview} alt="" /> : null}
-            <>
-              <InputWrap>
-                <Label>웹 사이트 URL</Label>
-                <div style={{ display: 'flex' }}>
-                  <PreviewInput
-                    placeholder="https://www.linkgather.com"
-                    ref={urlRef}
-                    onChange={() => urlChange}
+            <ContentWrap>
+              <Title text={'등록하기'} />
+              {preview ? <PreviewImage src={preview} alt="" /> : null}
+              <>
+                <InputWrap>
+                  <Label>웹 사이트 URL</Label>
+                  <div style={{ display: 'flex' }}>
+                    <PreviewInput
+                      placeholder="https://www.linkgather.com"
+                      ref={urlRef}
+                      onChange={urlChange}
+                    />
+                    <Preview onClick={getPreview}>이미지 미리보기</Preview>
+                  </div>
+                  {urlNull ? <ErrMessage>url을 입력해주세요</ErrMessage> : null}
+                </InputWrap>
+
+                <InputWrap>
+                  <Label>제목</Label>
+                  <InputEl
+                    type="text"
+                    placeholder="제목을 입력해주세요"
+                    ref={titleRef}
+                    onChange={titleChange}
                   />
-                  <Preview onClick={getPreview}>이미지 미리보기</Preview>
-                </div>
-                {urlNull ? <ErrMessage>url을 입력해주세요</ErrMessage> : null}
-              </InputWrap>
+                  {titleNull ? <ErrMessage>제목을 입력해주세요</ErrMessage> : null}
+                </InputWrap>
 
-              <InputWrap>
-                <Label>제목</Label>
-                <InputEl
-                  type="text"
-                  placeholder="제목을 입력해주세요"
-                  ref={titleRef}
-                  onChange={() => titleChange}
-                />
-                {titleNull ? <ErrMessage>제목을 입력해주세요</ErrMessage> : null}
-              </InputWrap>
-
-              <InputWrap>
-                <Label>설명</Label>
-                <Description
-                  placeholder="사이트에 대한 간략한 설명을 입력해주세요"
-                  ref={descriptionRef}
-                  onChange={() => descriptionChange}
-                />
-                {descriptionNull ? <ErrMessage>간단한 설명을 입력해주세요</ErrMessage> : null}
-              </InputWrap>
-              <Button isFill={false} _onClick={submitPost}>
-                등록하기
-              </Button>
-            </>
+                <InputWrap>
+                  <Label>설명</Label>
+                  <Description
+                    placeholder="사이트에 대한 간략한 설명을 입력해주세요"
+                    ref={descriptionRef}
+                    onChange={descriptionChange}
+                  />
+                  {descriptionNull ? <ErrMessage>간단한 설명을 입력해주세요</ErrMessage> : null}
+                </InputWrap>
+                <Button isFill={false} _onClick={submitPost}>
+                  등록하기
+                </Button>
+              </>
+            </ContentWrap>
           </PopUpWrap>
         </GrayBackground>
       ) : null}
@@ -199,7 +205,6 @@ const GrayBackground = styled.div`
   bottom: 0;
   left: 0;
   background-color: rgba(0, 0, 0, 0.8);
-  z-index: 10;
 `;
 
 const PopUpWrap = styled.div`
@@ -207,11 +212,18 @@ const PopUpWrap = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-height: 650px;
+  max-height: 450px;
   z-index: 10;
   width: 520px;
   padding: 30px 40px;
   background-color: #fff;
+`;
+
+const ContentWrap = styled.div`
+  max-height: 450px;
+  ::-webkit-scrollbar {
+    display: none;
+  }
   overflow-y: scroll;
 `;
 

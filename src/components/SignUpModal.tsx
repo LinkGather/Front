@@ -95,7 +95,10 @@ const SignUpModal = () => {
   //modal controll
   const handleSignUpModal = (e: React.MouseEvent<HTMLElement>) => {
     e.preventDefault();
-    if ((e.target as Element).className.includes('handleModal')) {
+    if (
+      (e.target as Element).getAttribute('class') === 'handleModal' ||
+      (e.target as Element).className.includes('handleModal')
+    ) {
       setOpen(!open);
       setNameErr(false);
       setEmailDupErr(false);
@@ -202,7 +205,6 @@ const SignUpModal = () => {
           <PopUpWrap>
             <Title text={'회원가입'} />
             <CloseButton _onClick={handleSignUpModal} />
-
             <InputWrap>
               <Label>이름</Label>
               <InputEl type="text" placeholder="홍길동" ref={nameRef} onChange={() => nameChange} />

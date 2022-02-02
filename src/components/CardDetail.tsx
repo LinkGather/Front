@@ -33,17 +33,17 @@ const CardDetail: React.FC<CardDetailProps> = (props) => {
   const descRef = useRef<HTMLTextAreaElement>();
 
   //onChange
-  const urlChange = (e: Event) => {
+  const urlChange = (e: React.ChangeEvent<HTMLElement>) => {
     const URL = (e.target as HTMLInputElement).value;
     setUrl(URL);
   };
 
-  const titleChange = (e: Event) => {
+  const titleChange = (e: React.ChangeEvent<HTMLElement>) => {
     const TITLE = (e.target as HTMLInputElement).value;
     setTitle(TITLE);
   };
 
-  const descChange = (e: Event) => {
+  const descChange = (e: React.ChangeEvent<HTMLElement>) => {
     const DESC = (e.target as HTMLTextAreaElement).value;
     setDescription(DESC);
   };
@@ -119,7 +119,7 @@ const CardDetail: React.FC<CardDetailProps> = (props) => {
   };
 
   return open ? (
-    <GrayBackground className="handleModal" onClick={() => _onClick}>
+    <GrayBackground className="handleModal" onClick={_onClick}>
       <PopUpWrap>
         <CloseButton />
         <OverFlowWrap>
@@ -148,7 +148,7 @@ const CardDetail: React.FC<CardDetailProps> = (props) => {
                   <PreviewInput
                     placeholder="https://www.linkgather.com"
                     ref={urlRef}
-                    onChange={() => urlChange}
+                    onChange={urlChange}
                     value={url}
                   />
                   <Preview onClick={getPreview}>이미지 미리보기</Preview>
@@ -162,7 +162,7 @@ const CardDetail: React.FC<CardDetailProps> = (props) => {
                   type="text"
                   placeholder="제목을 입력해주세요"
                   ref={titleRef}
-                  onChange={() => titleChange}
+                  onChange={titleChange}
                   value={title}
                 />
                 {titleNull ? <ErrMessage>제목을 입력해주세요</ErrMessage> : null}
@@ -173,7 +173,7 @@ const CardDetail: React.FC<CardDetailProps> = (props) => {
                 <Description
                   placeholder="사이트에 대한 간략한 설명을 입력해주세요"
                   ref={descRef}
-                  onChange={() => descChange}
+                  onChange={descChange}
                   value={description}
                 />
                 {descNull ? <ErrMessage>간단한 설명을 입력해주세요</ErrMessage> : null}

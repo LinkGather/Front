@@ -39,7 +39,7 @@ const Card: React.FC<CardProps> = (props) => {
     }
   };
 
-  const handleDetailModal = (e: MouseEvent) => {
+  const handleDetailModal = (e: React.MouseEvent<HTMLElement>) => {
     if ((e.target as Element).className?.includes('handleModal')) {
       if (open) {
         document.body.style.overflow = 'unset';
@@ -54,7 +54,7 @@ const Card: React.FC<CardProps> = (props) => {
     <>
       {open ? <CardDetail _onClick={handleDetailModal} card={card} /> : null}
       <ImgHidden>
-        <img src={card?.image} alt="" className="handleModal" onClick={() => handleDetailModal} />
+        <img src={card?.image} alt="" className="handleModal" onClick={handleDetailModal} />
         <Jjim
           onClick={() => {
             Dib(card?.id);
@@ -63,10 +63,10 @@ const Card: React.FC<CardProps> = (props) => {
           {Dibs && isLogin ? <FillHeart /> : <EmptyHeart />}
         </Jjim>
       </ImgHidden>
-      <Title className="handleModal" onClick={() => handleDetailModal}>
+      <Title className="handleModal" onClick={handleDetailModal}>
         {card?.title}
       </Title>
-      <CountWrap className="handleModal" onClick={() => handleDetailModal}>
+      <CountWrap className="handleModal" onClick={handleDetailModal}>
         <img src={LikeCountImg} alt="" />
         <span>{likes}</span>
       </CountWrap>

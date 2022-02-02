@@ -6,8 +6,8 @@ import { CloseButtonProps } from '../interfaces/props';
 const CloseButton: React.FC<CloseButtonProps> = (props) => {
   const { _onClick } = props;
   return (
-    <Close className="handleModal" onClick={_onClick}>
-      <AiOutlineClose />
+    <Close>
+      <AiOutlineClose className="handleModal" onClick={_onClick} />
     </Close>
   );
 };
