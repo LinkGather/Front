@@ -75,19 +75,19 @@ const SignUpModal = () => {
   }, [passwordCheck]);
 
   //input onChange event
-  const nameChange = (e: Event) => {
+  const nameChange = (e: React.ChangeEvent<HTMLElement>) => {
     const NAME = (e.target as HTMLInputElement).value;
     setName(NAME);
   };
-  const emailChange = (e: Event) => {
+  const emailChange = (e: React.ChangeEvent<HTMLElement>) => {
     const EMAIL = (e.target as HTMLInputElement).value;
     setEmail(EMAIL);
   };
-  const passwordChange = (e: Event) => {
+  const passwordChange = (e: React.ChangeEvent<HTMLElement>) => {
     const PASSWORD = (e.target as HTMLInputElement).value;
     setPassword(PASSWORD);
   };
-  const passwordCheckChange = (e: Event) => {
+  const passwordCheckChange = (e: React.ChangeEvent<HTMLElement>) => {
     const PASSWORDCHECK = (e.target as HTMLInputElement).value;
     setPasswordCheck(PASSWORDCHECK);
   };
@@ -207,7 +207,7 @@ const SignUpModal = () => {
             <CloseButton _onClick={handleSignUpModal} />
             <InputWrap>
               <Label>이름</Label>
-              <InputEl type="text" placeholder="홍길동" ref={nameRef} onChange={() => nameChange} />
+              <InputEl type="text" placeholder="홍길동" ref={nameRef} onChange={nameChange} />
               {nameErr ? <ErrMessage>이름을 확인해주세요</ErrMessage> : null}
               {nameNull ? <ErrMessage>이름을 입력해주세요</ErrMessage> : null}
             </InputWrap>
@@ -218,7 +218,7 @@ const SignUpModal = () => {
                 type="text"
                 placeholder="example@example.com"
                 ref={emailRef}
-                onChange={() => emailChange}
+                onChange={emailChange}
               />
               {emailDupErr ? <ErrMessage>중복된 이메일입니다.</ErrMessage> : null}
               {emailErr ? <ErrMessage>이메일 형식을 확인해주세요</ErrMessage> : null}
@@ -231,7 +231,7 @@ const SignUpModal = () => {
                 type="password"
                 placeholder="********"
                 ref={passwordRef}
-                onChange={() => passwordChange}
+                onChange={passwordChange}
               />
               {passwordErr ? <ErrMessage>패스워드를 확인해주세요</ErrMessage> : null}
               {passwordNull ? <ErrMessage>패스워드를 입력해주세요</ErrMessage> : null}
@@ -243,7 +243,7 @@ const SignUpModal = () => {
                 type="password"
                 placeholder="********"
                 ref={passwordCheckRef}
-                onChange={() => passwordCheckChange}
+                onChange={passwordCheckChange}
               />
               {passwordCheckErr ? <ErrMessage>패스워드를 확인해주세요</ErrMessage> : null}
               {passwordCheckNull ? <ErrMessage>패스워드 확인을 입력해주세요</ErrMessage> : null}
