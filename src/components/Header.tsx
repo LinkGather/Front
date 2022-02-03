@@ -117,7 +117,7 @@ const MemberBox = styled.div`
   justify-content: flex-end;
   align-items: center;
   @media (max-width: 575px) {
-    font-size: 0.6rem;
+    font-size: 12px;
   }
 `;
 
