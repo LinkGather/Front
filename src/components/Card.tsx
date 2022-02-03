@@ -108,11 +108,11 @@ const ImgHidden = styled.div`
       transition: 0.3s ease 0s, opacity 0.1s linear 0s !important;
     }
     @media (max-width: 980px) {
-      height: 100%;
+      height: 200px;
       object-fit: cover;
     }
     @media (max-width: 575px) {
-      height: 240px;
+      height: 250px;
     }
   }
   @media (max-width: 980px) {
