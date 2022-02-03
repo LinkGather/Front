@@ -3,7 +3,7 @@ import { SigninData, SignupData, submitPostData } from '../interfaces/data';
 import { getToken } from '../util/getToken';
 
 const api = axios.create({
-  baseURL: 'http://localhost:3001',
+  baseURL: 'https://linkgather.shop',
   headers: {
     'content-type': 'application/json;charset=UTF-8',
     'accept': 'application/json',
