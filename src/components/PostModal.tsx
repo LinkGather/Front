@@ -165,7 +165,6 @@ const PostModal = () => {
                   </div>
                   {urlNull ? <ErrMessage>url을 입력해주세요</ErrMessage> : null}
                 </InputWrap>
-
                 <InputWrap>
                   <Label>제목</Label>
                   <InputEl
@@ -212,15 +211,23 @@ const PopUpWrap = styled.div`
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  max-height: 450px;
+  max-height: 550px;
   z-index: 10;
   width: 520px;
   padding: 30px 40px;
   background-color: #fff;
+  box-sizing: border-box;
+  @media (max-width: 767px) {
+    width: 80%;
+    min-width: auto;
+  }
+  @media (max-width: 575px) {
+    padding: 20px;
+  }
 `;
 
 const ContentWrap = styled.div`
-  max-height: 450px;
+  max-height: 490px;
   ::-webkit-scrollbar {
     display: none;
   }
@@ -267,14 +274,16 @@ const InputEl = styled.input`
   padding: 15px 10px;
   border: 1px solid #dee2e6;
   border-radius: 3px;
-  width: 498px;
+  width: 100%;
+  box-sizing: border-box;
 `;
 
 const Description = styled.textarea`
   padding: 15px 10px;
   border: 1px solid #dee2e6;
   border-radius: 3px;
-  width: 498px;
+  width: 100%;
+  box-sizing: border-box;
   height: 100px;
   resize: none;
 `;

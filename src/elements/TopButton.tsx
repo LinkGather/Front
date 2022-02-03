@@ -22,6 +22,14 @@ const TopDiv = styled.div`
   width: 50px;
   height: 50px;
   z-index: 10;
+  @media (max-width: 575px) {
+    position: fixed;
+    cursor: pointer;
+    bottom: 15px;
+    right: 15px;
+    width: 35px;
+    height: 35px;
+  }
 `;
 
 export default TopButton;

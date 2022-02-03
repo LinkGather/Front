@@ -18,6 +18,9 @@ const ImgBox = styled.div`
   height: 50px;
   margin-right: 60px;
   padding: 10px 0;
+  @media (max-width: 575px) {
+    margin-right: 15px;
+  }
 `;
 
 export default Logo;

@@ -81,6 +81,10 @@ const Container = styled.div`
   display: flex;
   align-items: center;
   background-color: #000;
+  @media (max-width: 1200px) {
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
 `;
 
 const SearchInput = styled.input`
@@ -89,11 +93,21 @@ const SearchInput = styled.input`
   padding-left: 20px;
   outline: none;
   border-radius: 22px;
+  @media (max-width: 767px) {
+    width: 35%;
+  }
+  @media (max-width: 575px) {
+    width: 30%;
+    padding-left: 15px;
+  }
 `;
 
 const SearchIcon = styled.div`
   margin-left: -30px;
   cursor: pointer;
+  @media (max-width: 575px) {
+    margin-left: -25px;
+  }
 `;
 
 const MemberBox = styled.div`
@@ -102,6 +116,9 @@ const MemberBox = styled.div`
   font-size: 14px;
   justify-content: flex-end;
   align-items: center;
+  @media (max-width: 575px) {
+    font-size: 0.6rem;
+  }
 `;
 
 const Box = styled.div`

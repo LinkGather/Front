@@ -138,6 +138,12 @@ const ModalButton = styled.div`
   color: #fff;
   margin-left: 40px;
   cursor: pointer;
+  @media (max-width: 767px) {
+    margin-left: 10%;
+  }
+  @media (max-width: 575px) {
+    margin-left: 8px;
+  }
 `;
 
 const GrayBackground = styled.div`
@@ -157,9 +163,17 @@ const PopUpWrap = styled.div`
   transform: translate(-50%, -50%);
   max-height: 100vh;
   z-index: 10;
-  width: 370px;
+  width: 490px;
   padding: 50px 60px;
   background-color: #fff;
+  box-sizing: border-box;
+  @media (max-width: 767px) {
+    width: 80%;
+    min-width: auto;
+  }
+  @media (max-width: 575px) {
+    padding: 20px;
+  }
 `;
 
 const InputWrap = styled.div`
@@ -178,7 +192,8 @@ const InputEl = styled.input`
   padding: 15px 10px;
   border: 1px solid #dee2e6;
   border-radius: 3px;
-  width: 350px;
+  width: 100%;
+  box-sizing: border-box;
 `;
 
 const ErrMessage = styled.span`

@@ -228,6 +228,13 @@ const PopUpWrap = styled.div`
   width: 520px;
   background-color: #fff;
   border-radius: 5px;
+  @media (max-width: 767px) {
+    width: 80%;
+    min-width: auto;
+  }
+  @media (max-width: 575px) {
+    padding: 20px;
+  }
 `;
 
 const OverFlowWrap = styled.div`
@@ -270,6 +277,13 @@ const DelModalWrap = styled.div`
   width: 540px;
   padding: 30px 30px;
   background-color: #fff;
+  @media (max-width: 767px) {
+    width: 80%;
+    min-width: auto;
+  }
+  @media (max-width: 575px) {
+    padding: 20px;
+  }
 `;
 
 const DelQ = styled.div`
@@ -279,6 +293,9 @@ const DelQ = styled.div`
   justify-content: space-between;
   & span {
     cursor: pointer;
+  }
+  @media (max-width: 575px) {
+    font-size: 1rem;
   }
 `;
 

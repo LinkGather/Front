@@ -26,6 +26,9 @@ const CardList = () => {
 const CardBg = styled.div`
   margin-bottom: 32px;
   border-radius: 5px;
+  @media (max-width: 767px) {
+    min-width: 270px;
+  }
 `;
 
 export default CardList;

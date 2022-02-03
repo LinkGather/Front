@@ -13,6 +13,18 @@ const GridEl = styled.div`
   grid-template-columns: repeat(4, 1fr);
   gap: 0px 20px;
   align-items: start;
+  @media (max-width: 1200px) {
+    width: 100%;
+    padding: 0 15px;
+    box-sizing: border-box;
+    grid-template-columns: repeat(3, 1fr);
+  }
+  @media (max-width: 767px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  @media (max-width: 575px) {
+    grid-template-columns: repeat(1, 1fr);
+  }
 `;
 
 export default Grid;

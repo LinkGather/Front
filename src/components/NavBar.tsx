@@ -89,6 +89,10 @@ const PostingBox = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
+  @media (max-width: 1200px) {
+    padding: 0 15px;
+    box-sizing: border-box;
+  }
 `;
 
 const Sort = styled.span`

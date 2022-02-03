@@ -16,7 +16,7 @@ const Close = styled.button`
   position: fixed;
   font-size: 25px;
   top: -35px;
-  right: 0px;
+  right: -3px;
   border: 0;
   color: #fff;
   background-color: transparent;

@@ -107,6 +107,16 @@ const ImgHidden = styled.div`
       transform: scale(1.1);
       transition: 0.3s ease 0s, opacity 0.1s linear 0s !important;
     }
+    @media (max-width: 980px) {
+      height: 100%;
+      object-fit: cover;
+    }
+    @media (max-width: 575px) {
+      height: 240px;
+    }
+  }
+  @media (max-width: 980px) {
+    height: 100%;
   }
 `;
 
@@ -176,6 +186,9 @@ const ButtonWrap = styled.div`
   display: flex;
   margin: 10px 0 0 0;
   justify-content: space-between;
+  @media (max-width: 767px) {
+    min-width: 192px;
+  }
 `;
 
 export default Card;
