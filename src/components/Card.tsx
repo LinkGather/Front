@@ -40,7 +40,10 @@ const Card: React.FC<CardProps> = (props) => {
   };
 
   const handleDetailModal = (e: React.MouseEvent<HTMLElement>) => {
-    if ((e.target as Element).className?.includes('handleModal')) {
+    if (
+      (e.target as Element).getAttribute('class') === 'handleModal' ||
+      (e.target as Element).className?.includes('handleModal')
+    ) {
       if (open) {
         document.body.style.overflow = 'unset';
       } else {
