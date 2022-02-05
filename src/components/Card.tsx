@@ -70,8 +70,10 @@ const Card: React.FC<CardProps> = (props) => {
         {card?.title}
       </Title>
       <CountWrap className="handleModal" onClick={handleDetailModal}>
-        <img src={LikeCountImg} alt="" />
-        <span>{likes}</span>
+        <img src={LikeCountImg} alt="" className="handleModal" onClick={handleDetailModal} />
+        <span className="handleModal" onClick={handleDetailModal}>
+          {likes}
+        </span>
       </CountWrap>
       <hr />
       <ButtonWrap>

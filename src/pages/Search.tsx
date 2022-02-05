@@ -41,7 +41,6 @@ const Search: React.FC = () => {
 
   return (
     <PostContext.Provider value={{ cards, setPosts, sortPosts }}>
-      <Header />
       <NavBar searched={true} />
       {loading ? <CardList /> : <Loader />}
     </PostContext.Provider>

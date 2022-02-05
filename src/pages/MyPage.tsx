@@ -36,7 +36,6 @@ const MyPage = () => {
 
   return (
     <PostContext.Provider value={{ cards, setPosts, sortPosts }}>
-      <Header />
       <NavBar />
       {loading ? (
         cards.length ? (

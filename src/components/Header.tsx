@@ -3,8 +3,6 @@ import { useContext, useRef } from 'react';
 import styled from 'styled-components';
 import Logo from '../elements/Logo';
 import Logout from '../elements/LogoutButton';
-import LoginModal from './LoginModal';
-import SignUpModal from './SignUpModal';
 import { UserContext } from '../contextAPI/users';
 import { GrSearch } from 'react-icons/gr';
 import MyPageButton from '../elements/MyPageButton';
@@ -34,6 +32,10 @@ const Header = () => {
     }
   };
 
+  const goLogin = () => {
+    history.push('/login');
+  };
+
   return (
     <Head>
       <Container>
@@ -55,10 +57,7 @@ const Header = () => {
                 <Logout />
               </>
             ) : (
-              <>
-                <SignUpModal />
-                <LoginModal />
-              </>
+              <LoginButton onClick={goLogin}>로그인</LoginButton>
             )}
           </MemberBox>
         </Box>
@@ -72,7 +71,7 @@ const Head = styled.div`
   position: sticky;
   top: 0;
   width: 100%;
-  z-index: 2;
+  z-index: 1;
 `;
 
 const Container = styled.div`
@@ -118,6 +117,18 @@ const MemberBox = styled.div`
   align-items: center;
   @media (max-width: 575px) {
     font-size: 12px;
+  }
+`;
+
+const LoginButton = styled.div`
+  color: #fff;
+  margin-left: 40px;
+  cursor: pointer;
+  @media (max-width: 767px) {
+    margin-left: 10%;
+  }
+  @media (max-width: 575px) {
+    margin-left: 8px;
   }
 `;
 

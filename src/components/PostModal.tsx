@@ -1,16 +1,17 @@
 import * as React from 'react';
 import { useState, useContext, useRef } from 'react';
-import Title from '../elements/Title';
 import Button from '../elements/Button';
 import styled from 'styled-components';
-import { UserContext } from '../contextAPI/users';
 import { previewApi, submitPostApi } from '../axios/axios';
 import { PostContext } from '../contextAPI/posts';
 import CloseButton from '../elements/CloseButton';
+import { PostModalContext } from '../contextAPI/ModalControll';
 
 const PostModal = () => {
+  const { modalOpen, setModalState } = useContext(PostModalContext);
+
   //modal state
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(modalOpen);
 
   //포스트 정보 state
   const [url, setUrl] = useState(null);
@@ -24,7 +25,6 @@ const PostModal = () => {
   const [descriptionNull, setDescriptionNull] = useState(false);
 
   //context api
-  const { isLogin } = useContext(UserContext);
   const { setPosts } = useContext(PostContext);
 
   //ref
@@ -46,26 +46,6 @@ const PostModal = () => {
   const descriptionChange = (e: React.ChangeEvent<HTMLElement>) => {
     const description = (e.target as HTMLTextAreaElement).value;
     setDescription(description);
-  };
-
-  //modal controll
-  const handlePostModal = (e: React.MouseEvent<HTMLElement>) => {
-    if (
-      isLogin &&
-      ((e.target as Element).getAttribute('class') === 'handleModal' ||
-        (e.target as Element).className.includes('handleModal'))
-    ) {
-      setOpen(!open);
-      setUrl(null);
-      setTitle(null);
-      setDescription(null);
-      setPreview(null);
-      setUrlNull(false);
-      setTitleNull(false);
-      setDescriptionNull(false);
-    } else if (!isLogin) {
-      alert('로그인 해주세요');
-    }
   };
 
   //preview image
@@ -133,25 +113,13 @@ const PostModal = () => {
 
   return (
     <>
-      <div
-        className="handleModal"
-        style={{
-          height: '60px',
-          display: 'flex',
-          alignItems: 'center',
-          cursor: 'pointer',
-        }}
-        onClick={handlePostModal}
-      >
-        등록
-      </div>
-      {open ? (
-        <GrayBackground className="handleModal" onClick={handlePostModal}>
+      {open && (
+        <GrayBackground className="handleModal" onClick={setModalState}>
           <PopUpWrap>
-            <CloseButton _onClick={handlePostModal} />
+            <Subject>등록하기</Subject>
+            <CloseButton _onClick={setModalState} />
             <ContentWrap>
-              <Title text={'등록하기'} />
-              {preview ? <PreviewImage src={preview} alt="" /> : null}
+              {preview && <PreviewImage src={preview} alt="" />}
               <>
                 <InputWrap>
                   <Label>웹 사이트 URL</Label>
@@ -163,7 +131,7 @@ const PostModal = () => {
                     />
                     <Preview onClick={getPreview}>이미지 미리보기</Preview>
                   </div>
-                  {urlNull ? <ErrMessage>url을 입력해주세요</ErrMessage> : null}
+                  {urlNull && <ErrMessage>url을 입력해주세요</ErrMessage>}
                 </InputWrap>
                 <InputWrap>
                   <Label>제목</Label>
@@ -173,7 +141,7 @@ const PostModal = () => {
                     ref={titleRef}
                     onChange={titleChange}
                   />
-                  {titleNull ? <ErrMessage>제목을 입력해주세요</ErrMessage> : null}
+                  {titleNull && <ErrMessage>제목을 입력해주세요</ErrMessage>}
                 </InputWrap>
 
                 <InputWrap>
@@ -183,7 +151,7 @@ const PostModal = () => {
                     ref={descriptionRef}
                     onChange={descriptionChange}
                   />
-                  {descriptionNull ? <ErrMessage>간단한 설명을 입력해주세요</ErrMessage> : null}
+                  {descriptionNull && <ErrMessage>간단한 설명을 입력해주세요</ErrMessage>}
                 </InputWrap>
                 <Button isFill={false} _onClick={submitPost}>
                   등록하기
@@ -192,7 +160,7 @@ const PostModal = () => {
             </ContentWrap>
           </PopUpWrap>
         </GrayBackground>
-      ) : null}
+      )}
     </>
   );
 };
@@ -203,6 +171,7 @@ const GrayBackground = styled.div`
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: 2;
   background-color: rgba(0, 0, 0, 0.8);
 `;
 
@@ -232,6 +201,13 @@ const ContentWrap = styled.div`
     display: none;
   }
   overflow-y: scroll;
+`;
+
+const Subject = styled.div`
+  margin-bottom: 30px;
+  font-size: 32px;
+  font-weight: bold;
+  letter-spacing: -0.6px;
 `;
 
 const InputWrap = styled.div`

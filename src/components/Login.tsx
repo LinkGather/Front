@@ -1,16 +1,15 @@
 import * as React from 'react';
-import { useContext, useRef, useState } from 'react';
-import Title from '../elements/Title';
-import Button from '../elements/Button';
+import { useState, useRef, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { loginApi } from '../axios/axios';
 import { UserContext } from '../contextAPI/users';
-import CloseButton from '../elements/CloseButton';
+import Button from '../elements/Button';
 import Kakao from '../elements/Kakao';
+import Title from '../elements/Title';
 
-const LoginModal = () => {
-  //modal state
-  const [open, setOpen] = useState(false);
+const Login = () => {
+  const history = useHistory();
 
   //로그인 정보 state
   const [email, setEmail] = useState(null);
@@ -39,17 +38,6 @@ const LoginModal = () => {
     setPassword(PASSWORD);
   };
 
-  //modal controll
-  const handleLoginModal = (e: React.MouseEvent<HTMLElement>) => {
-    if (
-      (e.target as Element).getAttribute('class') === 'handleModal' ||
-      (e.target as Element).className.includes('handleModal')
-    ) {
-      setOpen(!open);
-      setLoginErr(false);
-    }
-  };
-
   //login submit
   const login = async () => {
     const data = {
@@ -75,7 +63,7 @@ const LoginModal = () => {
     if (res.status === 200) {
       localStorage.setItem('token', res.data.token);
       setState(true);
-      setOpen(!open);
+      history.push('/');
     } else {
       setEmailNull(false);
       setPasswordNull(false);
@@ -88,73 +76,52 @@ const LoginModal = () => {
     }
   };
 
+  const goSignUp = () => {
+    history.push('/signup');
+  };
+
   return (
-    <>
-      <ModalButton className="handleModal" onClick={handleLoginModal}>
-        로그인
-      </ModalButton>
-      {open ? (
-        <GrayBackground className="handleModal" onClick={handleLoginModal}>
-          <PopUpWrap>
-            <Title text={'로그인'} />
-            <CloseButton _onClick={handleLoginModal} />
-            <>
-              <InputWrap>
-                <Label>이메일</Label>
-                <InputEl
-                  type="text"
-                  placeholder="example@example.com"
-                  ref={emailRef}
-                  onChange={emailChange}
-                  onKeyPress={enterLogin}
-                />
-                {emailNull ? <ErrMessage>이메일을 입력해주세요</ErrMessage> : null}
-              </InputWrap>
-              <InputWrap>
-                <Label>패스워드</Label>
-                <InputEl
-                  type="password"
-                  placeholder="********"
-                  ref={passwordRef}
-                  onChange={passwordChange}
-                  onKeyPress={enterLogin}
-                />
-                {passwordNull ? <ErrMessage>패스워드를 입력해주세요</ErrMessage> : null}
-                {loginErr ? <ErrMessage>이메일 및 패스워드를 확인해주세요</ErrMessage> : null}
-              </InputWrap>
-              <Button isFill={false} _onClick={login}>
-                로그인
-              </Button>
-              <Kakao />
-            </>
-          </PopUpWrap>
-        </GrayBackground>
-      ) : null}
-    </>
+    <PopUpWrap>
+      <Title text={'로그인'} />
+      <DivLine />
+      <>
+        <InputWrap>
+          <Label>이메일</Label>
+          <InputEl
+            type="text"
+            placeholder="example@example.com"
+            ref={emailRef}
+            onChange={emailChange}
+            onKeyPress={enterLogin}
+          />
+          {emailNull ? <ErrMessage>이메일을 입력해주세요</ErrMessage> : null}
+        </InputWrap>
+        <InputWrap>
+          <Label>패스워드</Label>
+          <InputEl
+            type="password"
+            placeholder="********"
+            ref={passwordRef}
+            onChange={passwordChange}
+            onKeyPress={enterLogin}
+          />
+          {passwordNull ? <ErrMessage>패스워드를 입력해주세요</ErrMessage> : null}
+          {loginErr ? <ErrMessage>이메일 및 패스워드를 확인해주세요</ErrMessage> : null}
+        </InputWrap>
+        <Button isFill={false} _onClick={login}>
+          로그인
+        </Button>
+        <SocialWrap>
+          <span>SNS 계정으로 로그인하기</span>
+          <IconWrap>
+            <Kakao />
+          </IconWrap>
+        </SocialWrap>
+        <ToSignup onClick={goSignUp}>계정이 없으신가요? 간편가입하기</ToSignup>
+      </>
+    </PopUpWrap>
   );
 };
-
-const ModalButton = styled.div`
-  color: #fff;
-  margin-left: 40px;
-  cursor: pointer;
-  @media (max-width: 767px) {
-    margin-left: 10%;
-  }
-  @media (max-width: 575px) {
-    margin-left: 8px;
-  }
-`;
-
-const GrayBackground = styled.div`
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 10;
-`;
 
 const PopUpWrap = styled.div`
   position: absolute;
@@ -174,6 +141,11 @@ const PopUpWrap = styled.div`
   @media (max-width: 575px) {
     padding: 20px;
   }
+`;
+
+const DivLine = styled.div`
+  padding-top: 18px;
+  border-top: 4px solid #000;
 `;
 
 const InputWrap = styled.div`
@@ -196,9 +168,32 @@ const InputEl = styled.input`
   box-sizing: border-box;
 `;
 
+const SocialWrap = styled.div`
+  margin: 35px 0 80px;
+  text-align: center;
+  box-sizing: border-box;
+`;
+
+const IconWrap = styled.div`
+  display: flex;
+  justify-content: center;
+`;
+
+const ToSignup = styled.div`
+  height: 56px;
+  border: 1px solid #dee2e6;
+  border-radius: 28px;
+  font-weight: 600;
+  font-size: 14px;
+  color: #1d1d1d;
+  text-align: center;
+  line-height: 56px;
+  cursor: pointer;
+`;
+
 const ErrMessage = styled.span`
   font-size: 0.6em;
   color: #ff6b6b;
 `;
 
-export default LoginModal;
+export default Login;

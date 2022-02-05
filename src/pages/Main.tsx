@@ -46,7 +46,6 @@ const Main = () => {
 
   return (
     <PostContext.Provider value={{ cards, setPosts, sortPosts }}>
-      <Header />
       <NavBar />
       {loading ? <CardList /> : <Loader />}
     </PostContext.Provider>

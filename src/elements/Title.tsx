@@ -4,13 +4,13 @@ import { TitleProps } from '../interfaces/props';
 
 const Title: React.FC<TitleProps> = (props) => {
   const { text } = props;
-  return <T className="handleModal">{text}</T>;
+  return <T>{text}</T>;
 };
 
 const T = styled.div`
-  margin-bottom: 30px;
-  font-size: 32px;
-  font-weight: bold;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 44px;
   letter-spacing: -0.6px;
 `;
 

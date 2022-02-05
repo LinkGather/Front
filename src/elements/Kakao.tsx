@@ -9,21 +9,20 @@ function Kakao() {
   return (
     <Kbutton onClick={a}>
       <BsFillChatFill />
-      <span>카카오 로그인</span>
     </Kbutton>
   );
 }
 
 const Kbutton = styled.button`
   display: flex;
-  width: 100%;
-  margin-top: 10px;
+  width: 44px;
+  margin: 10px 10px 0 0;
   cursor: pointer;
-  padding: 20px;
+  height: 44px;
   font-size: 16px;
   font-weight: 700;
   border: 0;
-  border-radius: 3px;
+  border-radius: 50%;
   background-color: #faef3f;
   align-items: center;
   justify-content: center;

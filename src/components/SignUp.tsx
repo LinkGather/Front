@@ -1,17 +1,13 @@
 import * as React from 'react';
-import { useEffect, useRef, useState } from 'react';
-import Button from '../elements/Button';
-import Title from '../elements/Title';
+import { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
 import { signUpApi } from '../axios/axios';
-import { validatePassword, validatePasswordCheck } from '../util/passwordValidator';
+import Button from '../elements/Button';
+import Title from '../elements/Title';
 import { validateEmail } from '../util/emailValidator';
-import CloseButton from '../elements/CloseButton';
+import { validatePassword, validatePasswordCheck } from '../util/passwordValidator';
 
-const SignUpModal = () => {
-  //modal state
-  const [open, setOpen] = useState(false);
-
+const SignUp = () => {
   //회원가입 정보 state
   const [email, setEmail] = useState(null);
   const [name, setName] = useState(null);
@@ -37,7 +33,7 @@ const SignUpModal = () => {
 
   //이메일 확인
   useEffect(() => {
-    if (!validateEmail(email) || !email) {
+    if (!validateEmail(email)) {
       setEmailErr(true);
       setEmailDupErr(false);
       setEmailNull(false);
@@ -92,30 +88,6 @@ const SignUpModal = () => {
     setPasswordCheck(PASSWORDCHECK);
   };
 
-  //modal controll
-  const handleSignUpModal = (e: React.MouseEvent<HTMLElement>) => {
-    e.preventDefault();
-    if (
-      (e.target as Element).getAttribute('class') === 'handleModal' ||
-      (e.target as Element).className.includes('handleModal')
-    ) {
-      setOpen(!open);
-      setNameErr(false);
-      setEmailDupErr(false);
-      setEmailErr(false);
-      setPasswordErr(false);
-      setPasswordCheckErr(false);
-      setNameNull(false);
-      setPasswordCheckNull(false);
-      setPasswordNull(false);
-      setEmailNull(false);
-      setName(null);
-      setEmail(null);
-      setPassword(null);
-      setPasswordCheck(null);
-    }
-  };
-
   //signup submit
   const SignUp = async () => {
     const data = {
@@ -160,7 +132,6 @@ const SignUpModal = () => {
     const res = await signUpApi(data);
     if (res.status === 200) {
       alert('회원가입 성공');
-      setOpen(!open);
       setNameErr(false);
       setNameNull(false);
       setEmailDupErr(false);
@@ -192,82 +163,61 @@ const SignUpModal = () => {
   };
 
   return (
-    <>
-      <div
-        className="handleModal"
-        style={{ color: '#fff', cursor: 'pointer' }}
-        onClick={handleSignUpModal}
-      >
+    <PopUpWrap>
+      <Title text={'회원가입'} />
+      <DivLine />
+      <InputWrap>
+        <Label>이름</Label>
+        <InputEl type="text" placeholder="홍길동" ref={nameRef} onChange={nameChange} />
+        {nameErr && <ErrMessage>이름을 확인해주세요</ErrMessage>}
+        {nameNull && <ErrMessage>이름을 입력해주세요</ErrMessage>}
+      </InputWrap>
+
+      <InputWrap>
+        <Label>이메일</Label>
+        <InputEl
+          type="text"
+          placeholder="example@example.com"
+          ref={emailRef}
+          onChange={emailChange}
+        />
+        {emailDupErr ? <ErrMessage>중복된 이메일입니다.</ErrMessage> : null}
+        {emailErr ? <ErrMessage>이메일 형식을 확인해주세요</ErrMessage> : null}
+        {emailNull ? <ErrMessage>이메일을 입력해주세요</ErrMessage> : null}
+      </InputWrap>
+
+      <InputWrap>
+        <Label>패스워드</Label>
+        <InputEl
+          type="password"
+          placeholder="********"
+          ref={passwordRef}
+          onChange={passwordChange}
+        />
+        {passwordErr ? (
+          <ErrMessage>패스워드를 확인해주세요(영문+숫자+특수문자, 8~16글자)</ErrMessage>
+        ) : null}
+        {passwordNull ? <ErrMessage>패스워드를 입력해주세요</ErrMessage> : null}
+      </InputWrap>
+
+      <InputWrap>
+        <Label>패스워드 확인</Label>
+        <InputEl
+          type="password"
+          placeholder="********"
+          ref={passwordCheckRef}
+          onChange={passwordCheckChange}
+        />
+        {passwordCheckErr ? <ErrMessage>패스워드를 확인해주세요</ErrMessage> : null}
+        {passwordCheckNull ? <ErrMessage>패스워드 확인을 입력해주세요</ErrMessage> : null}
+      </InputWrap>
+
+      <Button isFill={false} _onClick={SignUp}>
         회원가입
-      </div>
-      {open ? (
-        <GrayBackground className="handleModal" onClick={handleSignUpModal}>
-          <PopUpWrap>
-            <Title text={'회원가입'} />
-            <CloseButton _onClick={handleSignUpModal} />
-            <InputWrap>
-              <Label>이름</Label>
-              <InputEl type="text" placeholder="홍길동" ref={nameRef} onChange={nameChange} />
-              {nameErr ? <ErrMessage>이름을 확인해주세요</ErrMessage> : null}
-              {nameNull ? <ErrMessage>이름을 입력해주세요</ErrMessage> : null}
-            </InputWrap>
-
-            <InputWrap>
-              <Label>이메일</Label>
-              <InputEl
-                type="text"
-                placeholder="example@example.com"
-                ref={emailRef}
-                onChange={emailChange}
-              />
-              {emailDupErr ? <ErrMessage>중복된 이메일입니다.</ErrMessage> : null}
-              {emailErr ? <ErrMessage>이메일 형식을 확인해주세요</ErrMessage> : null}
-              {emailNull ? <ErrMessage>이메일을 입력해주세요</ErrMessage> : null}
-            </InputWrap>
-
-            <InputWrap>
-              <Label>패스워드</Label>
-              <InputEl
-                type="password"
-                placeholder="********"
-                ref={passwordRef}
-                onChange={passwordChange}
-              />
-              {passwordErr ? <ErrMessage>패스워드를 확인해주세요</ErrMessage> : null}
-              {passwordNull ? <ErrMessage>패스워드를 입력해주세요</ErrMessage> : null}
-            </InputWrap>
-
-            <InputWrap>
-              <Label>패스워드 확인</Label>
-              <InputEl
-                type="password"
-                placeholder="********"
-                ref={passwordCheckRef}
-                onChange={passwordCheckChange}
-              />
-              {passwordCheckErr ? <ErrMessage>패스워드를 확인해주세요</ErrMessage> : null}
-              {passwordCheckNull ? <ErrMessage>패스워드 확인을 입력해주세요</ErrMessage> : null}
-            </InputWrap>
-
-            <Button isFill={false} _onClick={SignUp}>
-              회원가입
-            </Button>
-          </PopUpWrap>
-        </GrayBackground>
-      ) : null}
-    </>
+      </Button>
+    </PopUpWrap>
   );
 };
-
-const GrayBackground = styled.div`
-  position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  background-color: rgba(0, 0, 0, 0.8);
-  z-index: 10;
-`;
 
 const PopUpWrap = styled.div`
   position: absolute;
@@ -293,6 +243,11 @@ const InputWrap = styled.div`
   margin-bottom: 20px;
 `;
 
+const DivLine = styled.div`
+  padding-top: 18px;
+  border-top: 4px solid #000;
+`;
+
 const Label = styled.label`
   display: inline-block;
   width: 100%;
@@ -314,4 +269,4 @@ const ErrMessage = styled.span`
   color: #ff6b6b;
 `;
 
-export default SignUpModal;
+export default SignUp;

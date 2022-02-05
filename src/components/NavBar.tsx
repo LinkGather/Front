@@ -2,13 +2,16 @@ import * as React from 'react';
 import { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
+import { PostModalContext } from '../contextAPI/ModalControll';
 import { PostContext } from '../contextAPI/posts';
+import { UserContext } from '../contextAPI/users';
 import { Click, NavBarProps } from '../interfaces/props';
 import PostModal from './PostModal';
 
 const NavBar: React.FC<NavBarProps> = (props) => {
   const { searched } = props;
   const { cards, sortPosts, setPosts } = useContext(PostContext);
+  const { isLogin } = useContext(UserContext);
 
   const history = useHistory();
   const searchWord = history.location.search.split('=')[1];
@@ -16,6 +19,9 @@ const NavBar: React.FC<NavBarProps> = (props) => {
   //sort state
   const [sortedRecent, setSortedRecent] = useState(true);
   const [sortedRecomend, setSortedRecomend] = useState(false);
+
+  //modal state
+  const [modalOpen, setModalOpen] = useState(false);
 
   const sortRecent = async () => {
     if (!sortedRecent) {
@@ -33,41 +39,58 @@ const NavBar: React.FC<NavBarProps> = (props) => {
     }
   };
 
+  const setModalState = (e: React.MouseEvent<HTMLElement>) => {
+    if (
+      isLogin &&
+      ((e.target as Element).getAttribute('class') === 'handleModal' ||
+        (e.target as Element).className.includes('handleModal'))
+    ) {
+      setModalOpen(!modalOpen);
+    } else if (!isLogin) {
+      alert('로그인 해주세요');
+    }
+  };
+
   return (
-    <PostingContainer>
-      <PostingBox>
-        {searched ? (
-          <WordWrap>
-            {searchWord ? (
-              <>
-                <strong>{searchWord}</strong>(으)로 검색한 결과입니다. ({cards.length}개)
-              </>
-            ) : (
-              <>검색어를 입력하지 않으면 랜덤으로 카드 한장이 나옵니다.</>
-            )}
-          </WordWrap>
-        ) : (
-          <div>
-            {sortedRecent ? (
-              <Sort click={true} onClick={sortRecent}>
-                최신순
-              </Sort>
-            ) : (
-              <Sort onClick={sortRecent}>최신순</Sort>
-            )}
-            <span style={{ color: '#dee2e6', margin: '0px 10px' }}>|</span>
-            {sortedRecomend ? (
-              <Sort click={true} onClick={sortRecomend}>
-                추천순
-              </Sort>
-            ) : (
-              <Sort onClick={sortRecomend}>추천순</Sort>
-            )}
-          </div>
-        )}
-        <PostModal />
-      </PostingBox>
-    </PostingContainer>
+    <PostModalContext.Provider value={{ modalOpen, setModalState }}>
+      <PostingContainer>
+        <PostingBox>
+          {searched ? (
+            <WordWrap>
+              {searchWord ? (
+                <>
+                  <strong>{searchWord}</strong>(으)로 검색한 결과입니다. ({cards.length}개)
+                </>
+              ) : (
+                <>검색어를 입력하지 않으면 랜덤으로 카드 한장이 나옵니다.</>
+              )}
+            </WordWrap>
+          ) : (
+            <div>
+              {sortedRecent ? (
+                <Sort click={true} onClick={sortRecent}>
+                  최신순
+                </Sort>
+              ) : (
+                <Sort onClick={sortRecent}>최신순</Sort>
+              )}
+              <span style={{ color: '#dee2e6', margin: '0px 10px' }}>|</span>
+              {sortedRecomend ? (
+                <Sort click={true} onClick={sortRecomend}>
+                  추천순
+                </Sort>
+              ) : (
+                <Sort onClick={sortRecomend}>추천순</Sort>
+              )}
+            </div>
+          )}
+          <PostButton className="handleModal" onClick={setModalState}>
+            등록
+          </PostButton>
+        </PostingBox>
+      </PostingContainer>
+      {modalOpen && <PostModal />}
+    </PostModalContext.Provider>
   );
 };
 
@@ -116,6 +139,13 @@ const Sort = styled.span`
 
 const WordWrap = styled.span`
   font-size: 14.5px;
+`;
+
+const PostButton = styled.div`
+  height: 60px;
+  display: flex;
+  align-items: center;
+  cursor: pointer;
 `;
 
 export default NavBar;
