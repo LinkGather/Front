@@ -19,20 +19,11 @@ jobs:
       - name: Checkout source code.
         uses: actions/checkout@v2
 
-      - name: Cache node modules # node modules 캐싱
-        uses: actions/cache@v1
-        with:
-          path: node_modules
-          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
-          restore-keys: |
-            ${{ runner.OS }}-build-
-            ${{ runner.OS }}-
-
       - name: Install Dependencies
         run: yarn install
 
       - name: Build
-        run: yarn build
+        run: CI='' yarn build
 
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
