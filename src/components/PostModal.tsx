@@ -186,6 +186,10 @@ const PopUpWrap = styled.div`
   padding: 30px 40px;
   background-color: #fff;
   box-sizing: border-box;
+  ::-webkit-scrollbar {
+    display: none;
+  }
+  overflow-y: scroll;
   @media (max-width: 767px) {
     width: 80%;
     min-width: auto;
@@ -197,10 +201,6 @@ const PopUpWrap = styled.div`
 
 const ContentWrap = styled.div`
   max-height: 490px;
-  ::-webkit-scrollbar {
-    display: none;
-  }
-  overflow-y: scroll;
 `;
 
 const Subject = styled.div`
