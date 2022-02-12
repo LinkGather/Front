@@ -31,45 +31,6 @@ const SignUp = () => {
   const passwordRef = useRef<HTMLInputElement>();
   const passwordCheckRef = useRef<HTMLInputElement>();
 
-  //이메일 확인
-  useEffect(() => {
-    if (!validateEmail(email)) {
-      setEmailErr(true);
-      setEmailDupErr(false);
-      setEmailNull(false);
-    } else if (emailDupErr) {
-      setEmailErr(false);
-      setEmailDupErr(true);
-      setEmailNull(false);
-    } else {
-      setEmailErr(false);
-      setEmailDupErr(false);
-      setEmailNull(false);
-    }
-  }, [email]);
-
-  //패스워드 확인
-  useEffect(() => {
-    if (!validatePassword(password)) {
-      setPasswordErr(true);
-      setPasswordNull(false);
-    } else {
-      setPasswordErr(false);
-      setPasswordNull(false);
-    }
-  }, [password]);
-
-  //패스워드 체크 확인
-  useEffect(() => {
-    if (!validatePasswordCheck(password, passwordCheck)) {
-      setPasswordCheckErr(true);
-      setPasswordCheckNull(false);
-    } else {
-      setPasswordCheckErr(false);
-      setPasswordCheckNull(false);
-    }
-  }, [passwordCheck]);
-
   //input onChange event
   const nameChange = (e: React.ChangeEvent<HTMLElement>) => {
     const NAME = (e.target as HTMLInputElement).value;
@@ -194,6 +155,9 @@ const SignUp = () => {
           ref={passwordRef}
           onChange={passwordChange}
         />
+        {!passwordNull && passwordErr && (
+          <InfoMessage>패스워드는 영문,숫자,특수문자 포함 8~16자 입니다. </InfoMessage>
+        )}
         {passwordErr ? (
           <ErrMessage>패스워드를 확인해주세요(영문+숫자+특수문자, 8~16글자)</ErrMessage>
         ) : null}
@@ -267,6 +231,11 @@ const InputEl = styled.input`
 const ErrMessage = styled.span`
   font-size: 0.6em;
   color: #ff6b6b;
+`;
+
+const InfoMessage = styled.span`
+  font-size: 0.6em;
+  color: #333;
 `;
 
 export default SignUp;
