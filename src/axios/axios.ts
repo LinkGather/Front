@@ -3,7 +3,8 @@ import { SigninData, SignupData, submitPostData } from '../interfaces/data';
 import { getToken } from '../util/getToken';
 
 const api = axios.create({
-  baseURL: 'https://linkgather.shop/api',
+  // baseURL: 'https://linkgather.shop/api',
+  baseURL: 'http://localhost:3001',
   headers: {
     'content-type': 'application/json;charset=UTF-8',
     'accept': 'application/json',
@@ -24,7 +25,7 @@ api.interceptors.request.use((config) => {
 export const signUpApi = async (data: SignupData) => {
   try {
     console.log(data);
-    const res = await api.post('/users/signup', {
+    const res = await api.post('/api/users/signup', {
       email: data.email,
       name: data.name,
       password: data.password,
@@ -40,7 +41,7 @@ export const signUpApi = async (data: SignupData) => {
 export const loginApi = async (data: SigninData) => {
   try {
     console.log(data);
-    const res = await api.post('/users/signin', {
+    const res = await api.post('/api/users/signin', {
       email: data.email,
       password: data.password,
     });
@@ -53,7 +54,7 @@ export const loginApi = async (data: SigninData) => {
 //이미지 미리보기 api
 export const previewApi = async (url: string) => {
   try {
-    return await api.post(`/posts/preview`, {
+    return await api.post(`/api/posts/preview`, {
       url: url,
     });
   } catch (err: any) {
@@ -64,7 +65,7 @@ export const previewApi = async (url: string) => {
 //포스트 뷰 api
 export const getPostApi = async () => {
   try {
-    return await api.get('/posts');
+    return await api.get('/api/posts');
   } catch (err: any) {
     return err.response;
   }
@@ -73,7 +74,9 @@ export const getPostApi = async () => {
 //추천순 뷰 api
 export const getPostSortApi = async () => {
   try {
-    return await api.get('/posts/sort');
+    const res = await api.get('/api/posts/sort');
+    console.log('응답하라', res);
+    return res;
   } catch (err: any) {
     return err.response;
   }
@@ -82,7 +85,7 @@ export const getPostSortApi = async () => {
 //마이페이지 뷰 api
 export const getMyPostApi = async () => {
   try {
-    return await api.get(`/posts/mypage`);
+    return await api.get(`/api/posts/mypage`);
   } catch (err: any) {
     return err.response;
   }
@@ -91,7 +94,7 @@ export const getMyPostApi = async () => {
 //포스트 등록 api
 export const submitPostApi = async (data: submitPostData) => {
   try {
-    return api.post('/posts', {
+    return api.post('/api/posts', {
       url: data.url,
       title: data.title,
       description: data.description,
@@ -104,7 +107,7 @@ export const submitPostApi = async (data: submitPostData) => {
 //포스트 수정 api
 export const editPostApi = async (id: number, data: submitPostData) => {
   try {
-    return api.patch(`/posts/${id}`, {
+    return api.patch(`/api/posts/${id}`, {
       url: data.url,
       title: data.title,
       description: data.description,
@@ -117,7 +120,7 @@ export const editPostApi = async (id: number, data: submitPostData) => {
 //추천하기 api
 export const likeApi = async (id: number) => {
   try {
-    return await api.post(`/posts/${id}/like`);
+    return await api.post(`/api/posts/${id}/like`);
   } catch (err: any) {
     return err.response;
   }
@@ -126,7 +129,7 @@ export const likeApi = async (id: number) => {
 //찜하기 api
 export const dibApi = async (id: number) => {
   try {
-    return await api.post(`/posts/${id}/dib`);
+    return await api.post(`/api/posts/${id}/dib`);
   } catch (err: any) {
     return err.response;
   }
@@ -135,7 +138,7 @@ export const dibApi = async (id: number) => {
 //검색하기 api
 export const searchApi = async (words: string) => {
   try {
-    return await api.get(`/posts/search?words=${words}`);
+    return await api.get(`/api/posts/search?words=${words}`);
   } catch (err: any) {
     return err.response;
   }
@@ -144,7 +147,7 @@ export const searchApi = async (words: string) => {
 //삭제하기 api
 export const deletePostApi = async (id: number) => {
   try {
-    return await api.delete(`/posts/${id}`);
+    return await api.delete(`/api/posts/${id}`);
   } catch (err: any) {
     return err.response;
   }
