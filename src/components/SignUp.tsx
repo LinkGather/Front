@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { useState, useRef, useEffect } from 'react';
+import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { signUpApi } from '../axios/axios';
 import Button from '../elements/Button';
@@ -8,6 +9,7 @@ import { validateEmail } from '../util/emailValidator';
 import { validatePassword, validatePasswordCheck } from '../util/passwordValidator';
 
 const SignUp = () => {
+  const history = useHistory();
   //회원가입 정보 state
   const [email, setEmail] = useState(null);
   const [name, setName] = useState(null);
@@ -102,6 +104,7 @@ const SignUp = () => {
       setPasswordNull(false);
       setPasswordCheckErr(false);
       setPasswordCheckNull(false);
+      history.push('/login');
     } else if (res.status === 400) {
       if (res.data.msg === '이메일이 중복됩니다.') {
         setEmailDupErr(true);

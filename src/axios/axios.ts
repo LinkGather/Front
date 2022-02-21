@@ -120,7 +120,7 @@ export const editPostApi = async (id: number, data: submitPostData) => {
 //추천하기 api
 export const likeApi = async (id: number) => {
   try {
-    return await api.post(`/api/posts/${id}/like`);
+    return await api.post(`/api/posts/${id}/likes`);
   } catch (err: any) {
     return err.response;
   }
