@@ -5,6 +5,7 @@ import { BsFillChatFill } from 'react-icons/bs';
 function Kakao() {
   const a = () => {
     window.location.href = 'https://linkgather.shop/api/users/kakao';
+    // window.location.href = 'http://localhost:3001/api/users/kakao';
   };
   return (
     <Kbutton onClick={a}>
