@@ -11,7 +11,7 @@ export interface CloseButtonProps {
 }
 
 export interface CardProps {
-  card?: CardType;
+  card: CardType;
 }
 
 export interface CardDetailProps extends CardProps {
