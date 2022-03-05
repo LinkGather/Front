@@ -1,10 +1,8 @@
-import * as React from 'react';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 import styled from 'styled-components';
-import Grid from '../../../elements/Grid';
-import { PostContext } from '../../../contextAPI/posts';
-import TopButton from '../../../elements/TopButton';
 import { Card } from '../Card';
+import { Grid, TopButton } from '../../elements';
+import { PostContext } from '../../libs/contextAPI/posts';
 
 const CardBg = styled.div`
   margin-bottom: 32px;
@@ -13,6 +11,7 @@ const CardBg = styled.div`
     min-width: 270px;
   }
 `;
+
 const CardList = () => {
   // useContext
   const { cards } = useContext(PostContext);
@@ -30,4 +29,4 @@ const CardList = () => {
   );
 };
 
-export default CardList;
+export { CardList };

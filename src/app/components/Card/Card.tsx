@@ -1,15 +1,14 @@
-import * as React from 'react';
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { FiThumbsUp } from 'react-icons/fi';
 import { postRepository } from '../../repositories';
-import { ReactComponent as EmptyHeart } from '../../../images/EmptyHeart.svg';
-import { ReactComponent as FillHeart } from '../../../images/FillHeart.svg';
-import Button from '../../../elements/Button';
-import LikeCountImg from '../../../images/LikeCount.png';
-import { UserContext } from '../../../contextAPI/users';
-import { CardProps } from '../../../interfaces/props';
 import { CardDetail } from '../CardDetail';
+import { Button } from '../../elements';
+import { UserContext } from '../../libs/contextAPI';
+import { CardProps } from '../../libs/interfaces';
+import { ReactComponent as EmptyHeart } from '../../../assets/images/EmptyHeart.svg';
+import { ReactComponent as FillHeart } from '../../../assets/images/FillHeart.svg';
+import LikeCountImg from '../../../assets/images/LikeCount.png';
 
 const ImgHidden = styled.div`
   overflow: hidden;

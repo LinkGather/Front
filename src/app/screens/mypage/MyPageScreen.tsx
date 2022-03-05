@@ -1,12 +1,9 @@
-/* eslint-disable no-nested-ternary */
-import * as React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
-import Loader from '../../../elements/Loader';
-import { getMyPostApi } from '../../../axios/axios';
-import CardList from '../../../components/CardList';
-import NavBar from '../../../components/NavBar';
-import { PostContext } from '../../../contextAPI/posts';
+import { Loader } from '../../elements';
+import { postRepository } from '../../repositories';
+import { CardList, NavBar } from '../../components';
+import { PostContext } from '../../libs/contextAPI';
 
 const PostNull = styled.div`
   width: 1176px;
@@ -44,15 +41,15 @@ const MyPageScreen = () => {
   // effects
   useEffect(() => {
     setLoading(false);
-    getMyPostApi().then((res) => {
-      setCards(res.data.posts);
+    postRepository.myPage().then((res) => {
+      setCards(res.posts);
       setLoading(true);
     });
   }, []);
   // handlers
   const setPosts = async () => {
-    const res = await getMyPostApi();
-    setCards(res.data.posts);
+    const res = await postRepository.myPage();
+    setCards(res.posts);
     setLoading(true);
   };
   const sortPosts = async () => {};

@@ -1,11 +1,9 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
-import CardList from '../../../components/CardList';
-import Loader from '../../../elements/Loader';
-import { searchApi } from '../../../axios/axios';
-import { PostContext } from '../../../contextAPI/posts';
-import NavBar from '../../../components/NavBar';
+import { CardList, NavBar } from '../../components';
+import { Loader } from '../../elements';
+import { postRepository } from '../../repositories';
+import { PostContext } from '../../libs/contextAPI';
 
 const SearchScreen: React.FC = () => {
   // prop destruction
@@ -38,17 +36,17 @@ const SearchScreen: React.FC = () => {
   // effects
   useEffect(() => {
     setLoading(false);
-    searchApi(history.location?.search?.split('=')[1]).then((res) => {
-      setCards(res.data.posts);
+    postRepository.search({ words: history.location?.search?.split('=')[1] }).then((res) => {
+      setCards(res.posts);
       setLoading(true);
     });
   }, []);
   // handlers
 
   const setPosts = async () => {
-    const res = await searchApi(history.location?.search?.split('=')[1]);
-    if (res.status === 200) {
-      setCards(res.data.posts);
+    const res = await postRepository.search({ words: history.location?.search?.split('=')[1] });
+    if (res.success) {
+      setCards(res.posts);
       setLoading(true);
     } else {
       console.dir(res);

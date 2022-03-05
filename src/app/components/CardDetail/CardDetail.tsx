@@ -1,13 +1,11 @@
-import * as React from 'react';
-import { useContext, useRef, useState } from 'react';
+import React, { useContext, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { BiEditAlt, BiArrowBack } from 'react-icons/bi';
 import { AiOutlineDelete } from 'react-icons/ai';
 import { postRepository } from '../../repositories';
-import Button from '../../../elements/Button';
-import CloseButton from '../../../elements/CloseButton';
-import { PostContext } from '../../../contextAPI/posts';
-import { CardDetailProps, EditClickProps } from '../../../interfaces/props';
+import { Button, CloseButton } from '../../elements';
+import { PostContext } from '../../libs/contextAPI';
+import { CardDetailProps, EditClickProps } from '../../libs/interfaces/';
 
 const GrayBackground = styled.div`
   position: fixed;

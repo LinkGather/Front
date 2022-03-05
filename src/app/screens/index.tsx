@@ -1,10 +1,9 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
-import CardList from '../../components/CardList';
-import { PostContext } from '../../contextAPI/posts';
-import { getPostApi, getPostSortApi } from '../../axios/axios';
-import Loader from '../../elements/Loader';
-import NavBar from '../../components/NavBar';
+/* eslint-disable import/no-cycle */
+import React, { useEffect, useState } from 'react';
+import { CardList, NavBar } from '../components';
+import { PostContext } from '../libs/contextAPI';
+import { postRepository } from '../repositories';
+import { Loader } from '../elements';
 
 export * from './signup';
 export * from './search';
@@ -40,8 +39,8 @@ const IndexScreen = () => {
   // effects
   useEffect(() => {
     setLoading(false);
-    getPostApi().then((res) => {
-      setCards(res.data.posts);
+    postRepository.list().then((res) => {
+      setCards(res.posts);
       setLoading(true);
     });
   }, []);
@@ -49,18 +48,18 @@ const IndexScreen = () => {
   // handlers
   const setPosts = async () => {
     setLoading(false);
-    const res = await getPostApi();
-    if (res.status === 200) {
-      setCards(res.data.posts);
+    const res = await postRepository.list();
+    if (res.success) {
+      setCards(res.posts);
       setLoading(true);
     }
   };
 
   const sortPosts = async () => {
     setLoading(false);
-    const res = await getPostSortApi();
-    if (res.status === 200) {
-      setCards(res.data.posts);
+    const res = await postRepository.list();
+    if (res.success) {
+      setCards(res.posts);
       setLoading(true);
     }
   };

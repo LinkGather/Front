@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
-import { UserContext } from '../contextAPI/users';
-import Header from '../components/Header';
-import { isToken } from '../util/getToken';
+import { BrowserRouter, useHistory } from 'react-router-dom';
+import { Header } from './components';
+import { UserContext } from './libs/contextAPI';
+import { isToken } from './libs/util/getToken';
 import { AppRouter } from './routes';
 
 function App() {
@@ -21,10 +21,12 @@ function App() {
   }
 
   return (
-    <UserContext.Provider value={{ isLogin, setState }}>
-      <Header />
-      <AppRouter />
-    </UserContext.Provider>
+    <BrowserRouter>
+      <UserContext.Provider value={{ isLogin, setState }}>
+        <Header />
+        <AppRouter />
+      </UserContext.Provider>
+    </BrowserRouter>
   );
 }
 

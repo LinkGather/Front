@@ -1,12 +1,11 @@
-import * as React from 'react';
-import { useContext, useRef } from 'react';
+/* eslint-disable import/no-cycle */
+import React, { useContext, useRef } from 'react';
 import styled from 'styled-components';
 import { GrSearch } from 'react-icons/gr';
 import { useHistory } from 'react-router-dom';
-import Logo from '../../../elements/Logo';
-import Logout from '../../../elements/LogoutButton';
-import { UserContext } from '../../../contextAPI/users';
-import MyPageButton from '../../../elements/MyPageButton';
+import { Logo, Logout, MyPageButton } from '../../elements';
+import { UserContext } from '../../libs/contextAPI';
+import { ROUTE_LOGIN, ROUTE_SEARCH } from '../../routes';
 
 const Head = styled.div`
   position: -webkit-sticky;
@@ -92,10 +91,10 @@ const Header = () => {
 
   // search
   const search = () => {
-    if (history.location.pathname === '/search') {
-      window.location.replace(`/search?words=${searchRef.current?.value}`);
+    if (history.location.pathname === ROUTE_SEARCH) {
+      window.location.replace(`${ROUTE_SEARCH}?words=${searchRef.current?.value}`);
     } else {
-      history.push(`/search?words=${searchRef.current?.value}`);
+      history.push(`${ROUTE_SEARCH}?words=${searchRef.current?.value}`);
     }
   };
 
@@ -106,7 +105,7 @@ const Header = () => {
   };
 
   const goLogin = () => {
-    history.push('/login');
+    history.push(ROUTE_LOGIN);
   };
 
   return (
@@ -134,4 +133,4 @@ const Header = () => {
   );
 };
 
-export default Header;
+export { Header };

@@ -1,5 +1,5 @@
 import React from 'react';
-import SignUp from '../../../components/SignUp';
+import { SignUp } from '../../components';
 
 const SignUpScreen = () => {
   // prop destruction

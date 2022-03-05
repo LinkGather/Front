@@ -7,7 +7,11 @@ type DefaultReturn = {
 
 export const postRepository = {
   list() {
-    return httpClient.get<{ posts: PostModel[] }>('/api/posts');
+    return httpClient.get<DefaultReturn & { posts: PostModel[] }>('/api/posts');
+  },
+
+  myPage() {
+    return httpClient.get<{ posts: PostModel[] }>('/api/posts/mypage');
   },
 
   submitPost(data: { url: string; title: string; description: string }) {
@@ -43,6 +47,6 @@ export const postRepository = {
   },
 
   search(params: { words: string }) {
-    return httpClient.get<{ posts: PostModel[] }>(`/api/posts/search?words=${params.words}`);
+    return httpClient.get<DefaultReturn & { posts: PostModel[] }>(`/api/posts/search?words=${params.words}`);
   },
 };

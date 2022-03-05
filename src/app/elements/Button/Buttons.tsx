@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
-import { ButtonProps } from '../../../interfaces/props';
+import { ButtonProps } from '../../libs/interfaces';
 
 const SubmitButton = styled.button`
   width: 100%;

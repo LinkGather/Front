@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import styled from 'styled-components';
 import { AiOutlineClose } from 'react-icons/ai';
-import { CloseButtonProps } from '../../../interfaces/props';
+import { CloseButtonProps } from '../../libs/interfaces';
 
 const Close = styled.button`
   position: fixed;

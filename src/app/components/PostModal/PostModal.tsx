@@ -1,10 +1,8 @@
-import * as React from 'react';
-import { useState, useContext, useRef } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 import styled from 'styled-components';
 import { postRepository } from '../../repositories';
-import Button from '../../../elements/Button';
+import { Button, CloseButton } from '../../elements';
 import { PostContext, PostModalContext } from '../../libs/contextAPI';
-import CloseButton from '../../../elements/CloseButton';
 
 const GrayBackground = styled.div`
   position: fixed;

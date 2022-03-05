@@ -1,10 +1,9 @@
-import * as React from 'react';
-import { useContext, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
-import { PostModalContext, PostContext, UserContext } from '../../libs/contextAPI';
-import { Click, NavBarProps } from '../../../interfaces/props';
 import { PostModal } from '../PostModal';
+import { PostModalContext, PostContext, UserContext } from '../../libs/contextAPI';
+import { Click, NavBarProps } from '../../libs/interfaces/props';
 
 const PostingContainer = styled.div`
   display: flex;

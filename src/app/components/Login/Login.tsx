@@ -1,12 +1,10 @@
-import * as React from 'react';
-import { useState, useRef, useContext } from 'react';
+import React, { useState, useRef, useContext } from 'react';
 import { useHistory } from 'react-router-dom';
 import styled from 'styled-components';
 import { userRepository } from '../../repositories';
-import { UserContext } from '../../../contextAPI/users';
-import Button from '../../../elements/Button';
-import Kakao from '../../../elements/Kakao';
-import Title from '../../../elements/Title';
+import { UserContext } from '../../libs/contextAPI';
+import { Button, Kakao, Title } from '../../elements';
+import { ROUTE_SIGNUP } from '../../routes';
 
 const PopUpWrap = styled.div`
   position: absolute;
@@ -150,7 +148,7 @@ const Login = () => {
   };
 
   const goSignUp = () => {
-    history.push('/signup');
+    history.push(ROUTE_SIGNUP);
   };
 
   return (
