@@ -1,17 +1,23 @@
 {
+  "extends": "@ecubelabs/tsconfig/react.json",
   "compilerOptions": {
-    "target": "es2021",
-    "skipLibCheck": true,
-    "module": "commonjs",
-    "strict":true,
-    "strictNullChecks": false,
-    "esModuleInterop": false,
-    "emitDecoratorMetadata": true,
-    "experimentalDecorators": true,
-    "outDir": "dist",
-    "rootDir": "./src",
-    "jsx":"react"
+    "baseUrl": "src",
+    "paths": {
+      "@assets/*": ["assets/*"],
+      "@libs/*": ["app/libs/*"],
+      "@components": ["app/components"],
+      "@containers": ["app/containers"],
+      "@screens": ["app/screens"],
+      "@routes": ["app/routes"],
+      "@models": ["app/models"],
+      "@configs": ["app/configs"],
+      "@repositories": ["app/repositories"],
+      "@hooks": ["app/hooks"],
+      "@services": ["app/services"]
+    },
+    "jsx": "react-jsx",
+    "jsxImportSource": "@emotion/react"
   },
-  "include": ["src/**/*", "model/dbc.ts", "src/__test__","src/custom.d.ts"],
-  "exclude": ["node_modules"],
+  "include": ["src", "@types"],
+  "exclude": ["node_modules"]
 }
