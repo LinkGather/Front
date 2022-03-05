@@ -66,8 +66,7 @@ const NavBar: React.FC<NavBarProps> = (props) => {
   const { isLogin } = useContext(UserContext);
 
   const history = useHistory();
-  const searchWord = history.location.search.split('=')[1];
-
+  const searchWord = decodeURI(history.location.search.split('=')[1]);
   // sort state
   const [sortedRecent, setSortedRecent] = useState(true);
   const [sortedRecomend, setSortedRecomend] = useState(false);

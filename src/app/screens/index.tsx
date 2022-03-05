@@ -57,7 +57,7 @@ const IndexScreen = () => {
 
   const sortPosts = async () => {
     setLoading(false);
-    const res = await postRepository.list();
+    const res = await postRepository.sortedList();
     if (res.success) {
       setCards(res.posts);
       setLoading(true);

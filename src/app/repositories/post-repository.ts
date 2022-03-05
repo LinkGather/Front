@@ -10,6 +10,10 @@ export const postRepository = {
     return httpClient.get<DefaultReturn & { posts: PostModel[] }>('/api/posts');
   },
 
+  sortedList() {
+    return httpClient.get<DefaultReturn & { posts: PostModel[] }>('/api/posts/sort');
+  },
+
   myPage() {
     return httpClient.get<{ posts: PostModel[] }>('/api/posts/mypage');
   },
