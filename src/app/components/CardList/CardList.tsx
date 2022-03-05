@@ -19,7 +19,7 @@ const CardList = () => {
   return (
     <Grid>
       <TopButton />
-      {cards.map((card, i) => {
+      {cards?.map((card, i) => {
         return (
           <CardBg key={i}>
             <Card card={card} />
