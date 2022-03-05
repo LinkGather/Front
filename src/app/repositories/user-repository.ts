@@ -19,7 +19,7 @@ export const userRepository = {
   },
 
   login(data: { email: string; password: string }) {
-    return httpClient.post<Token & DefaultResponse>('/api/user/signin', {
+    return httpClient.post<Token & DefaultResponse>('/api/users/signin', {
       email: data.email,
       password: data.password,
     });

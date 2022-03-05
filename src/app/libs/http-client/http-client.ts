@@ -2,7 +2,7 @@ import Axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
 import { getToken } from '../util/getToken';
 
 export const httpClient = (() => {
-  const axios = Axios.create({ baseURL: 'https://linkgather.co.kr' });
+  const axios = Axios.create({ baseURL: 'http://localhost:3001/' });
   axios.interceptors.request.use((config) => {
     if (!config?.headers) {
       throw new Error(`Expected 'config' and 'config.headers' not to be undefined`);
