@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React, { useEffect, useState } from 'react';
 import { useHistory } from 'react-router-dom';
 import { CardList, NavBar } from '../../components';

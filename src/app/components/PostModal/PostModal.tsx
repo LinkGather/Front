@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React, { useState, useContext, useRef } from 'react';
 import styled from 'styled-components';
 import { postRepository } from '../../repositories';

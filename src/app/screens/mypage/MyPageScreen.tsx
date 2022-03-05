@@ -1,3 +1,5 @@
+/* eslint-disable no-nested-ternary */
+/* eslint-disable import/no-cycle */
 import React, { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import { Loader } from '../../elements';

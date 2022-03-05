@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React, { useContext, useState } from 'react';
 import styled from 'styled-components';
 import { FiThumbsUp } from 'react-icons/fi';

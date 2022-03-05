@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React, { useContext } from 'react';
 import styled from 'styled-components';
 import { Card } from '../Card';

@@ -1,3 +1,4 @@
+/* eslint-disable import/no-cycle */
 import React, { useContext, useRef, useState } from 'react';
 import styled from 'styled-components';
 import { BiEditAlt, BiArrowBack } from 'react-icons/bi';
@@ -5,7 +6,7 @@ import { AiOutlineDelete } from 'react-icons/ai';
 import { postRepository } from '../../repositories';
 import { Button, CloseButton } from '../../elements';
 import { PostContext } from '../../libs/contextAPI';
-import { CardDetailProps, EditClickProps } from '../../libs/interfaces/';
+import { CardDetailProps, EditClickProps } from '../../libs/interfaces';
 
 const GrayBackground = styled.div`
   position: fixed;
