@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import React, { useState, useRef, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { userRepository } from '../../repositories';
 import { UserContext } from '../../libs/contextAPI';
@@ -81,7 +81,7 @@ const ErrMessage = styled.span`
 `;
 
 const Login = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
 
   // 로그인 정보 state
   const [email, setEmail] = useState('');
@@ -135,7 +135,7 @@ const Login = () => {
     if (res.success) {
       localStorage.setItem('token', res.token);
       setState(true);
-      history.push('/');
+      navigate('/');
     } else {
       setEmailNull(false);
       setPasswordNull(false);
@@ -149,7 +149,7 @@ const Login = () => {
   };
 
   const goSignUp = () => {
-    history.push(ROUTE_SIGNUP);
+    navigate(ROUTE_SIGNUP);
   };
 
   return (

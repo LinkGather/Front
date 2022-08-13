@@ -2,7 +2,7 @@
 import React, { useContext, useRef } from 'react';
 import styled from 'styled-components';
 import { GrSearch } from 'react-icons/gr';
-import { useHistory } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Logo, Logout, MyPageButton } from '../../elements';
 import { UserContext } from '../../libs/contextAPI';
 import { ROUTE_LOGIN, ROUTE_SEARCH } from '../../routes';
@@ -87,14 +87,15 @@ const Header = () => {
   const searchRef = useRef<HTMLInputElement>(null);
 
   // useHistroy
-  const history = useHistory();
+  const navigate = useNavigate();
+  const location = useLocation();
 
   // search
   const search = () => {
-    if (history.location.pathname === ROUTE_SEARCH) {
+    if (location.pathname === ROUTE_SEARCH) {
       window.location.replace(`${ROUTE_SEARCH}?words=${searchRef.current?.value}`);
     } else {
-      history.push(`${ROUTE_SEARCH}?words=${searchRef.current?.value}`);
+      navigate(`${ROUTE_SEARCH}?words=${searchRef.current?.value}`);
     }
   };
 
@@ -105,7 +106,7 @@ const Header = () => {
   };
 
   const goLogin = () => {
-    history.push(ROUTE_LOGIN);
+    navigate(ROUTE_LOGIN);
   };
 
   return (

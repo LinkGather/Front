@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import React, { useEffect, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import { CardList, NavBar } from '../../components';
 import { Loader } from '../../elements';
 import { postRepository } from '../../repositories';
@@ -26,7 +26,7 @@ const SearchScreen: React.FC = () => {
     },
   ]);
   const [loading, setLoading] = useState(false);
-  const history = useHistory();
+  const location = useLocation();
 
   // formik
 
@@ -37,7 +37,7 @@ const SearchScreen: React.FC = () => {
   // effects
   useEffect(() => {
     setLoading(false);
-    postRepository.search({ words: history.location?.search?.split('=')[1] }).then((res) => {
+    postRepository.search({ words: location.search.split('=')[1] }).then((res) => {
       setCards(res.posts);
       setLoading(true);
     });
@@ -45,7 +45,7 @@ const SearchScreen: React.FC = () => {
   // handlers
 
   const setPosts = async () => {
-    const res = await postRepository.search({ words: history.location?.search?.split('=')[1] });
+    const res = await postRepository.search({ words: location.search.split('=')[1] });
     if (res.success) {
       setCards(res.posts);
       setLoading(true);

@@ -1,10 +1,9 @@
 /* eslint-disable import/no-cycle */
-import React, { useState, useRef, useEffect } from 'react';
-import { useHistory } from 'react-router-dom';
+import React, { useState, useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 import { userRepository } from '../../repositories';
 import { Button, Title } from '../../elements';
-import { validateEmail, validatePassword, validatePasswordCheck } from '../../libs/util';
 
 const PopUpWrap = styled.div`
   position: absolute;
@@ -62,7 +61,7 @@ const InfoMessage = styled.span`
 `;
 
 const SignUp = () => {
-  const history = useHistory();
+  const navigate = useNavigate();
   // 회원가입 정보 state
   const [email, setEmail] = useState('');
   const [name, setName] = useState('');
@@ -112,7 +111,6 @@ const SignUp = () => {
       password,
       passwordCheck,
     };
-    console.log(data);
     if (!name) {
       setNameNull(true);
       setPasswordCheckNull(false);
@@ -157,7 +155,7 @@ const SignUp = () => {
       setPasswordNull(false);
       setPasswordCheckErr(false);
       setPasswordCheckNull(false);
-      history.push('/login');
+      navigate('/login');
     } else if (!res.success) {
       if (res.msg === '이메일이 중복됩니다.') {
         setEmailDupErr(true);

@@ -1,6 +1,6 @@
 /* eslint-disable import/no-cycle */
 import React, { useContext, useState } from 'react';
-import { useHistory } from 'react-router-dom';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { PostModal } from '../PostModal';
 import { PostModalContext, PostContext, UserContext } from '../../libs/contextAPI';
@@ -65,8 +65,8 @@ const NavBar: React.FC<NavBarProps> = (props) => {
   const { cards, sortPosts, setPosts } = useContext(PostContext);
   const { isLogin } = useContext(UserContext);
 
-  const history = useHistory();
-  const searchWord = decodeURI(history.location.search.split('=')[1]);
+  const location = useLocation();
+  const searchWord = decodeURI(location.search.split('=')[1]);
   // sort state
   const [sortedRecent, setSortedRecent] = useState(true);
   const [sortedRecomend, setSortedRecomend] = useState(false);
